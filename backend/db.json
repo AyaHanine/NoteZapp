@@ -1,0 +1,16 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "title": "Ma première note",
+      "content": "Ceci est une note d'exemple.",
+      "category": "Perso",
+      "isFavorite": false,
+      "createdAt": "2024-06-01T12:00:00Z"
+    }
+  ],
+  "categories": [
+    { "id": 1, "name": "Perso" },
+    { "id": 2, "name": "Travail" }
+  ]
+}
