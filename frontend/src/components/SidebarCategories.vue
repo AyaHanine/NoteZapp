@@ -2,10 +2,10 @@
   <aside class="w-64 min-h-screen flex flex-col bg-copper-900 shadow-lg border-r border-copper-800">
     <!-- Profil utilisateur -->
     <div class="flex items-center px-6 py-7 border-b border-copper-800">
-      <div class="rounded-full bg-copper-400 text-copper-950 w-10 h-10 flex items-center justify-center text-lg font-bold shadow-inner">A</div>
+      <div class="rounded-full bg-copper-400 text-copper-950 w-10 h-10 flex items-center justify-center text-lg font-bold shadow-inner">U</div>
       <div class="ml-3">
-        <div class="font-bold text-copper-100 text-base">Aya Hanine</div>
-        <div class="text-xs text-copper-400">aya@notezapp.com</div>
+        <div class="font-bold text-copper-100 text-base">username</div>
+        <div class="text-xs text-copper-400">username@notezapp.com</div>
       </div>
     </div>
 
@@ -21,8 +21,8 @@
     <!-- New note -->
     <button
       class="mx-6 mb-4 mt-2 flex items-center justify-center gap-2 px-0 py-3 rounded-lg font-bold bg-gradient-to-r from-copper-400 to-copper-500 text-copper-950 shadow-md hover:from-copper-500 hover:to-copper-600 transition"
-      @click="$emit('new-note')"
-    >
+      @click="goToAddNote">
+    
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path d="M12 4v16m8-8H4"/>
       </svg>
@@ -69,4 +69,11 @@
 <script setup>
 defineProps(['categories', 'selectedCategory', 'selectedMenu']);
 import SidebarItem from "@/components/SidebarItem.vue";
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+function goToAddNote() {
+  router.push('/notes/add')
+}
 </script>
