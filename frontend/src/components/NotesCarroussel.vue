@@ -19,6 +19,8 @@
         :note="note"
         class="flex-shrink-0"
         style="width:370px; min-height:230px;"
+        @favorite-updated="handleFavorite"
+        @deleted="handleDeleted"
       />
     </div>
 
@@ -43,6 +45,7 @@ const props = defineProps({
   notes: { type: Array, default: () => [] },
   maxVisible: { type: Number, default: 3 }
 })
+const emit = defineEmits(['favorite-updated', 'deleted'])
 
 const currentStart = ref(0)
 
@@ -50,13 +53,19 @@ const visibleNotes = computed(() =>
   props.notes.slice(currentStart.value, currentStart.value + props.maxVisible)
 )
 
+function handleFavorite(updatedNote) {
+  emit('favorite-updated', updatedNote)
+}
+function handleDeleted(noteId) {
+  emit('deleted', noteId)
+}
+
 function prev() {
   if (currentStart.value > 0) currentStart.value--
 }
 function next() {
   if (currentStart.value + props.maxVisible < props.notes.length) currentStart.value++
 }
-
 
 watch(() => props.notes, () => { currentStart.value = 0 })
 </script>

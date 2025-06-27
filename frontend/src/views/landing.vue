@@ -84,7 +84,7 @@
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const goToHome = () => {
-  router.push('/home')
+  router.push('/user-home')
 }
 const categories = [
   "Planner", "TaskList", "Thoughts", "Journal", "ClassNotes", "Documents"

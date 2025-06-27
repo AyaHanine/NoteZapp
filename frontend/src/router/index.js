@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Landing from '../views/landing.vue'
 import UserHome from '@/views/userHome.vue'
+import AddNotePage from '@/views/AddNotePage.vue'
 
 
 const router = createRouter({
@@ -17,8 +18,13 @@ const router = createRouter({
       name: 'userHome',
       component: UserHome,
       meta: { title: 'Your Personal Space - NoteZapp', showHeaderFooter: true } 
+    },
+    {
+      path: '/notes/add',
+      name: 'add-note',
+      component: AddNotePage, 
+      meta: { title: 'Feel Free - NoteZapp', showHeaderFooter: true }
     }
-
     
   ],
 })

@@ -18,5 +18,9 @@
 </template>
 
 <script setup>
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const goToHome = () => {
+  router.push('/user-home')
+}
 </script>

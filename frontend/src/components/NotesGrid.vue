@@ -7,14 +7,15 @@
           {{ cat }}
         </h3>
         <div v-if="notesByCategory(cat).length" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <NoteCard v-for="note in notesByCategory(cat)" :key="note.id" :note="note" />
+          <NoteCard v-for="note in notesByCategory(cat)" :key="note.id" :note="note" @favorite-updated="updateFavorite" @deleted="removeNoteFromList"/>
         </div>
         <div v-else class="text-gray-400 text-sm ml-3">Aucune note.</div>
       </div>
     </template>
     <template v-else>
+      <!-- grilles toujours sur 3 colonnes -->
       <div v-if="notes.length" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        <NoteCard v-for="note in notes" :key="note.id" :note="note" />
+        <NoteCard v-for="note in notes" :key="note.id" :note="note" @favorite-updated="updateFavorite" @deleted="removeNoteFromList"/>
       </div>
       <div v-else class="text-gray-400 text-lg mt-16 text-center">
         Aucune note pour cette catégorie.
@@ -24,8 +25,10 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import NoteCard from "@/components/NoteCard.vue";
 const props = defineProps(['notes', 'categories', 'groupByCategory']);
+const notes = ref(props.notes || []);
 
 const categoryIcon = {
   Thoughts: `<svg fill="none" stroke="#f59e42" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>`,
@@ -40,5 +43,16 @@ function notesByCategory(cat) {
   return Array.isArray(props.notes)
     ? props.notes.filter(n => n.category === cat)
     : [];
+}
+
+function updateFavorite(updatedNote) {
+  const idx = notes.value.findIndex(n => n.id === updatedNote.id)
+  if (idx !== -1) {
+    notes.value[idx].favorite = updatedNote.favorite
+  }
+}
+
+function removeNoteFromList(noteId) {
+  notes.value = notes.value.filter(n => n.id !== noteId)
 }
 </script>
