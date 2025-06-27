@@ -105,7 +105,7 @@
       "id": "7",
       "title": "Idées de test",
       "content": "Penser à la scène d’intro, développer le personnage principal.",
-      "date": "2024-06-20T14:30:00Z",
+      "date": "2024-02-20T14:30:00Z",
       "category": "Thoughts",
       "tags": [
         "roman",
@@ -166,7 +166,9 @@
       "category": "Thoughts",
       "content": "<p>test</p>",
       "tags": [],
-      "date": "2025-06-27T01:14:45.588Z"
+      "date": "2025-06-27T01:14:45.588Z",
+      "deleted": true,
+      "deletionDate": "2025-06-27T14:37:10.032Z"
     },
     {
       "id": "fca0",
@@ -184,7 +186,9 @@
       "content": "<p>okokok</p>",
       "tags": [],
       "date": "2025-06-27T01:15:18.988Z",
-      "favorite": true
+      "favorite": true,
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "bfc0",
@@ -197,7 +201,9 @@
         "kl,frfreml",
         "lke,dke,d"
       ],
-      "date": "2025-06-27T01:15:57.887Z"
+      "date": "2025-06-27T01:15:57.887Z",
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "7de3",
@@ -262,6 +268,14 @@
       "content": "<p>ok</p>",
       "tags": [],
       "date": "2025-06-27T12:52:12.541Z"
+    },
+    {
+      "id": "f874",
+      "title": "aaa",
+      "category": "Planner",
+      "content": "<p>aaaa</p>",
+      "tags": [],
+      "date": "2025-06-27T14:36:29.018Z"
     }
   ]
 }

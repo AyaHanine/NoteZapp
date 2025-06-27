@@ -20,6 +20,63 @@ const sectionTitle = computed(() => {
   return ""
 })
 
+// Calcule le nombre de jours restants avant la suppression définitive
+function getDaysRemaining(deletionDate) {
+  if (!deletionDate) return null;
+
+  const deletion = new Date(deletionDate);
+  const expiryDate = new Date(deletion);
+  expiryDate.setDate(expiryDate.getDate() + 14); // 14 jours après la mise en corbeille
+
+  const now = new Date();
+  const diffTime = expiryDate - now;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  return diffDays > 0 ? diffDays : 0;
+}
+
+// Vérifie et supprime définitivement les notes expirées
+function checkExpiredNotes() {
+  const now = new Date();
+
+  notes.value.forEach(async (note) => {
+    if (note.deleted && note.deletionDate) {
+      const deletion = new Date(note.deletionDate);
+      const expiryDate = new Date(deletion);
+      expiryDate.setDate(expiryDate.getDate() + 14);
+
+      if (now >= expiryDate) {
+        try {
+          // Supprimer définitivement la note
+          await axios.delete(`http://localhost:3001/notes/${note.id}`);
+          notes.value = notes.value.filter(n => n.id !== note.id);
+        } catch (e) {
+          console.error("Erreur lors de la suppression définitive :", e);
+        }
+      }
+    }
+  });
+}
+
+// Restaurer une note depuis la corbeille
+async function restoreNote(note) {
+  try {
+    await axios.patch(`http://localhost:3001/notes/${note.id}`, {
+      deleted: false,
+      deletionDate: null
+    });
+
+    // Mettre à jour l'état local
+    const idx = notes.value.findIndex(n => n.id === note.id);
+    if (idx !== -1) {
+      notes.value[idx].deleted = false;
+      notes.value[idx].deletionDate = null;
+    }
+  } catch (e) {
+    console.error("Erreur lors de la restauration de la note :", e);
+  }
+}
+
 async function toggleTask(note, task) {
   const updatedTaskList = note.taskList.map(t =>
     t.id === task.id ? { ...t, completed: !t.completed } : t
@@ -44,7 +101,16 @@ const fetchNotes = async () => {
   }
   loading.value = false
 }
-onMounted(fetchNotes)
+
+onMounted(() => {
+  fetchNotes();
+
+  // Vérifier les notes expirées toutes les heures
+  setInterval(checkExpiredNotes, 60 * 60 * 1000);
+
+  // Vérification initiale après le chargement
+  setTimeout(checkExpiredNotes, 2000);
+});
 
 function selectCategory(cat) {
   selectedMenu.value = "category"
@@ -132,7 +198,7 @@ function removeNoteFromList(noteId) {
     />
 
     <!-- MAIN -->
-   <main class="flex-1 flex flex-col">
+    <main class="flex-1 flex flex-col">
       <section class="p-8 max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold mb-6 text-copper-900">
           {{ sectionTitle }}
@@ -151,15 +217,15 @@ function removeNoteFromList(noteId) {
               <div
                 v-for="note in filteredNotes"
                 :key="note.id"
-                class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5"
+                class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5 relative"
               >
                 <div class="flex items-center gap-3 mb-1">
-      <span class="text-copper-500 text-xl">
-        {{ note.category === 'TaskList' ? '✅' : '📅' }}
-      </span>
+                  <span class="text-copper-500 text-xl">
+                    {{ note.category === 'TaskList' ? '✅' : '📅' }}
+                  </span>
                   <span class="font-bold text-copper-900 text-lg">
-        {{ note.title }}
-      </span>
+                    {{ note.title }}
+                  </span>
                   <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
                 </div>
                 <div class="text-copper-800 mb-2" v-html="note.content"></div>
@@ -176,10 +242,25 @@ function removeNoteFromList(noteId) {
                       class="accent-copper-500 w-4 h-4"
                     />
                     <span :class="task.completed ? 'line-through text-copper-400' : ''">
-          {{ task.content }}
-        </span>
+                      {{ task.content }}
+                    </span>
                   </li>
                 </ul>
+
+                <!-- Affichage du temps restant et bouton de restauration (seulement pour la corbeille) -->
+                <template v-if="selectedMenu === 'trash' && note.deletionDate">
+                  <div class="mt-3 text-sm font-medium text-red-500">
+                    Suppression définitive dans {{ getDaysRemaining(note.deletionDate) }} jours
+                  </div>
+
+                  <!-- Bouton restaurer -->
+                  <button
+                    @click="restoreNote(note)"
+                    class="mt-2 px-3 py-1 bg-copper-400 hover:bg-copper-500 text-white rounded-lg text-sm font-medium"
+                  >
+                    Restaurer
+                  </button>
+                </template>
               </div>
             </div>
           </div>
@@ -250,8 +331,8 @@ function removeNoteFromList(noteId) {
                       class="accent-copper-500 w-4 h-4"
                     />
                     <span :class="task.completed ? 'line-through text-copper-400' : ''">
-      {{ task.content }}
-    </span>
+                      {{ task.content }}
+                    </span>
                   </li>
                 </ul>
               </div>

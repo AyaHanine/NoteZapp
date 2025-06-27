@@ -73,10 +73,13 @@ async function toggleFavorite() {
 }
 
 async function deleteNote() {
-  
   if (confirm("Supprimer cette note ?")) {
     try {
-      await axios.patch(`http://localhost:3001/notes/${props.note.id}`, { deleted: true })
+      const deletionDate = new Date().toISOString();
+      await axios.patch(`http://localhost:3001/notes/${props.note.id}`, {
+        deleted: true,
+        deletionDate: deletionDate
+      })
       emit("deleted", props.note.id)
     } catch (e) {
       alert("Erreur lors de la suppression de la note")
