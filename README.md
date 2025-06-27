@@ -171,7 +171,7 @@ Plusieurs modifs sont à prévoir pour cette page, notamment l'affichage de l'ed
 
   ## Tâches à réaliser
 
-1. **Authentification**  
+1. **Authentification**(en cours par Meryem)  
    L’utilisateur clique sur « Commencer gratuitement » et est redirigé vers la page d’authentification. Une fois authentifié, il accède à son espace personnel pour gérer ses notes.
 
 2. **Gestion des TaskList**  
