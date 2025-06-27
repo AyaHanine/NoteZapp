@@ -20,6 +20,20 @@ const sectionTitle = computed(() => {
   return ""
 })
 
+async function toggleTask(note, task) {
+  const updatedTaskList = note.taskList.map(t =>
+    t.id === task.id ? { ...t, completed: !t.completed } : t
+  )
+  try {
+    await axios.patch(`http://localhost:3001/notes/${note.id}`, {
+      taskList: updatedTaskList
+    })
+    task.completed = !task.completed
+  } catch (e) {
+    console.error("Erreur lors de la mise à jour de la tâche :", e)
+  }
+}
+
 const fetchNotes = async () => {
   loading.value = true
   try {
@@ -134,13 +148,39 @@ function removeNoteFromList(noteId) {
             </div>
             <!-- 3 notes par ligne même en corbeille -->
             <div v-else class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              <NoteCard
+              <div
                 v-for="note in filteredNotes"
                 :key="note.id"
-                :note="note"
-                @favorite-updated="updateFavorite"
-                @deleted="removeNoteFromList"
-              />
+                class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5"
+              >
+                <div class="flex items-center gap-3 mb-1">
+      <span class="text-copper-500 text-xl">
+        {{ note.category === 'TaskList' ? '✅' : '📅' }}
+      </span>
+                  <span class="font-bold text-copper-900 text-lg">
+        {{ note.title }}
+      </span>
+                  <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
+                </div>
+                <div class="text-copper-800 mb-2" v-html="note.content"></div>
+                <ul v-if="note.category === 'TaskList' && note.taskList" class="pl-3 space-y-1">
+                  <li
+                    v-for="task in note.taskList"
+                    :key="task.id"
+                    class="flex items-center gap-2 text-copper-700"
+                  >
+                    <input
+                      type="checkbox"
+                      :checked="task.completed"
+                      @change="toggleTask(note, task)"
+                      class="accent-copper-500 w-4 h-4"
+                    />
+                    <span :class="task.completed ? 'line-through text-copper-400' : ''">
+          {{ task.content }}
+        </span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </template>
@@ -203,13 +243,15 @@ function removeNoteFromList(noteId) {
                     :key="task.id"
                     class="flex items-center gap-2 text-copper-700"
                   >
-                    <span
-                      class="w-4 h-4 inline-block rounded-full border border-copper-500 mr-1"
-                      :class="task.completed ? 'bg-copper-500' : 'bg-white'"
-                    ></span>
+                    <input
+                      type="checkbox"
+                      :checked="task.completed"
+                      @change="toggleTask(note, task)"
+                      class="accent-copper-500 w-4 h-4"
+                    />
                     <span :class="task.completed ? 'line-through text-copper-400' : ''">
-                      {{ task.content }}
-                    </span>
+      {{ task.content }}
+    </span>
                   </li>
                 </ul>
               </div>

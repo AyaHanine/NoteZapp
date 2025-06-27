@@ -60,6 +60,19 @@
           placeholder="Ajouter un tag puis Entrée"
           class="border-b border-copper-200 py-2 focus:border-copper-400 focus:outline-none"
         />
+        <div v-if="noteCategory === 'TaskList'" class="mb-4">
+          <h3 class="font-semibold text-copper-900 mb-2">Tâches à réaliser</h3>
+          <div class="flex gap-2 mb-2">
+            <input v-model="taskInput" @keyup.enter.prevent="addTask" placeholder="Nouvelle tâche" class="border-b border-copper-200 py-2 flex-1 focus:border-copper-400 focus:outline-none" />
+            <button @click="addTask" class="bg-copper-400 hover:bg-copper-500 text-copper-950 font-bold px-4 rounded-lg">Ajouter</button>
+          </div>
+          <ul>
+            <li v-for="(task, i) in taskList" :key="task.id" class="flex items-center gap-2 mb-1">
+              <span>{{ task.content }}</span>
+              <button @click="removeTask(i)" class="text-copper-400 hover:text-copper-600">×</button>
+            </li>
+          </ul>
+        </div>
         <div class="flex justify-end mt-2">
           <button @click="showStep1=true; showStep2=false" class="mr-3 text-copper-400 font-semibold">Retour</button>
           <button
@@ -93,6 +106,8 @@ const errorMsg = ref("")
 // Modal steps
 const showStep1 = ref(false)
 const showStep2 = ref(false)
+const taskList = ref([])
+const taskInput = ref("")
 
 // --- GESTION DES TAGS ---
 function addTag() {
@@ -103,6 +118,16 @@ function addTag() {
   }
 }
 function removeTag(i) { tags.value.splice(i, 1) }
+
+// --- GESTION DES TÂCHES ---
+function addTask() {
+  const val = taskInput.value.trim()
+  if (val) {
+    taskList.value.push({ id: Date.now(), content: val, completed: false })
+    taskInput.value = ""
+  }
+}
+function removeTask(i) { taskList.value.splice(i, 1) }
 
 // --- ENVOI ---
 async function submitNote() {
@@ -121,6 +146,7 @@ async function submitNote() {
         content: noteContent.value,
         tags: tags.value,
         date: new Date().toISOString(),
+        ...(noteCategory.value === "TaskList" ? { taskList: taskList.value } : {})
       })
     });
     showStep1.value = false
