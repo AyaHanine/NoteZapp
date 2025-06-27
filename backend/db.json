@@ -8,7 +8,8 @@
       "category": "Planner",
       "tags": ["organisation", "révision"],
       "favorite": true,
-      "pinned": true
+      "pinned": true,
+      "deleted" : true
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
       "category": "Thoughts",
       "tags": ["roman", "écriture"],
       "favorite": false,
-      "pinned": false
+      "pinned": false,
+      "deleted" : true
     },
     {
       "id": 3,
@@ -28,7 +30,8 @@
       "category": "ClassNotes",
       "tags": ["math", "cours"],
       "favorite": false,
-      "pinned": false
+      "pinned": false,
+      "deleted" : true
     },
     {
       "id": 4,
@@ -38,7 +41,8 @@
       "category": "Journal",
       "tags": ["perso", "journal"],
       "favorite": false,
-      "pinned": false
+      "pinned": false,
+      "deleted" : false
     },
     {
       "id": 5,
@@ -53,8 +57,10 @@
         { "id": 1, "content": "Terminer le devoir de math", "completed": false },
         { "id": 2, "content": "Préparer le plan du projet", "completed": true },
         { "id": 3, "content": "Faire les courses", "completed": false }
-      ]
+      ],
+      "deleted" : false
     },
+    
     {
       "id": 6,
       "title": "Document - Processus API",
@@ -63,7 +69,30 @@
       "category": "Documents",
       "tags": ["api", "tech"],
       "favorite": false,
-      "pinned": false
+      "pinned": false,
+      "deleted" : false
+    },
+     {
+      "id": 7,
+      "title": "Idées de test",
+      "content": "Penser à la scène d’intro, développer le personnage principal.",
+      "date": "2024-06-20T14:30:00Z",
+      "category": "Thoughts",
+      "tags": ["roman", "écriture"],
+      "favorite": false,
+      "pinned": false,
+      "deleted" : false
+    },
+     {
+      "id": 8,
+      "title": "Idées de test",
+      "content": "Penser à la scène d’intro, développer le personnage principal.",
+      "date": "2024-06-20T14:30:00Z",
+      "category": "Thoughts",
+      "tags": ["roman", "écriture"],
+      "favorite": false,
+      "pinned": false,
+      "deleted" : false
     }
   ]
 }

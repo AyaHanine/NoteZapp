@@ -30,11 +30,13 @@ import Footer from "./components/Footer.vue";
 </script>
 
 <template>
-    <div>
-        <Header v-if="route.meta.showHeaderFooter !== false  "/>
-        <router-view />
-        <Footer v-if="route.meta.showHeaderFooter !== false" />
-    </div>
+    <div class="flex flex-col min-h-screen bg-copper-50">
+    <Header v-if="route.meta.showHeaderFooter !== false"/>
+    <main class="flex-1 flex flex-col">
+      <router-view />
+    </main>
+    <Footer v-if="route.meta.showHeaderFooter !== false"/>
+  </div>
 </template>
 
 <style scoped></style>
