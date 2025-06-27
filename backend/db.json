@@ -2,15 +2,97 @@
   "notes": [
     {
       "id": 1,
-      "title": "Ma première note",
-      "content": "Ceci est une note d'exemple.",
-      "category": "Perso",
-      "isFavorite": false,
-      "createdAt": "2024-06-01T12:00:00Z"
+      "title": "Plan de révision",
+      "content": "Organisation de la semaine et planning des tâches principales.",
+      "date": "2024-06-26T09:00:00Z",
+      "category": "Planner",
+      "tags": ["organisation", "révision"],
+      "favorite": true,
+      "pinned": true,
+      "deleted" : true
+    },
+    {
+      "id": 2,
+      "title": "Idées de roman",
+      "content": "Penser à la scène d’intro, développer le personnage principal.",
+      "date": "2024-06-20T14:30:00Z",
+      "category": "Thoughts",
+      "tags": ["roman", "écriture"],
+      "favorite": false,
+      "pinned": false,
+      "deleted" : true
+    },
+    {
+      "id": 3,
+      "title": "Cours de math - Chap 5",
+      "content": "Résumé sur les suites arithmétiques, exercices à refaire.",
+      "date": "2024-06-15T09:45:00Z",
+      "category": "ClassNotes",
+      "tags": ["math", "cours"],
+      "favorite": false,
+      "pinned": false,
+      "deleted" : true
+    },
+    {
+      "id": 4,
+      "title": "Journal du 26 juin",
+      "content": "Belle journée, beaucoup avancé sur le projet NoteZapp.",
+      "date": "2024-06-26T22:15:00Z",
+      "category": "Journal",
+      "tags": ["perso", "journal"],
+      "favorite": false,
+      "pinned": false,
+      "deleted" : false
+    },
+    {
+      "id": 5,
+      "title": "Tasklist Semaine",
+      "content": "Liste des choses à faire cette semaine.",
+      "date": "2024-06-24T10:00:00Z",
+      "category": "TaskList",
+      "tags": ["tâches", "hebdo"],
+      "favorite": true,
+      "pinned": false,
+      "taskList": [
+        { "id": 1, "content": "Terminer le devoir de math", "completed": false },
+        { "id": 2, "content": "Préparer le plan du projet", "completed": true },
+        { "id": 3, "content": "Faire les courses", "completed": false }
+      ],
+      "deleted" : false
+    },
+    
+    {
+      "id": 6,
+      "title": "Document - Processus API",
+      "content": "Spécifications pour l’API de prise de notes, endpoints principaux à implémenter.",
+      "date": "2024-06-22T13:10:00Z",
+      "category": "Documents",
+      "tags": ["api", "tech"],
+      "favorite": false,
+      "pinned": false,
+      "deleted" : false
+    },
+     {
+      "id": 7,
+      "title": "Idées de test",
+      "content": "Penser à la scène d’intro, développer le personnage principal.",
+      "date": "2024-06-20T14:30:00Z",
+      "category": "Thoughts",
+      "tags": ["roman", "écriture"],
+      "favorite": false,
+      "pinned": false,
+      "deleted" : false
+    },
+     {
+      "id": 8,
+      "title": "Idées de test",
+      "content": "Penser à la scène d’intro, développer le personnage principal.",
+      "date": "2024-06-20T14:30:00Z",
+      "category": "Thoughts",
+      "tags": ["roman", "écriture"],
+      "favorite": false,
+      "pinned": false,
+      "deleted" : false
     }
-  ],
-  "categories": [
-    { "id": 1, "name": "Perso" },
-    { "id": 2, "name": "Travail" }
   ]
 }
