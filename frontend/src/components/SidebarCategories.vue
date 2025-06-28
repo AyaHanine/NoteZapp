@@ -12,7 +12,10 @@
     <!-- Search bar -->
     <div class="px-6 pt-5 pb-2">
       <input
+        v-if="selectedMenu !== 'notes'"
         type="text"
+        :value="searchQuery"
+        @input="e => $emit('update:searchQuery', e.target.value)"
         placeholder="Rechercher…"
         class="w-full rounded-lg border border-copper-700 px-3 py-2 text-sm bg-copper-800 text-copper-100 placeholder-copper-400 focus:outline-none focus:ring-2 focus:ring-copper-400 transition"
       />
@@ -22,7 +25,6 @@
     <button
       class="mx-6 mb-4 mt-2 flex items-center justify-center gap-2 px-0 py-3 rounded-lg font-bold bg-gradient-to-r from-copper-400 to-copper-500 text-copper-950 shadow-md hover:from-copper-500 hover:to-copper-600 transition"
       @click="goToAddNote">
-    
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path d="M12 4v16m8-8H4"/>
       </svg>
@@ -67,13 +69,17 @@
 </template>
 
 <script setup>
-defineProps(['categories', 'selectedCategory', 'selectedMenu']);
-import SidebarItem from "@/components/SidebarItem.vue";
 
+import SidebarItem from "@/components/SidebarItem.vue";
 import { useRouter } from 'vue-router'
+
+defineProps(['categories', 'selectedCategory', 'selectedMenu', 'searchQuery']);
+defineEmits(['update:searchQuery'])
+
 const router = useRouter()
 
 function goToAddNote() {
   router.push('/notes/add')
 }
+
 </script>
