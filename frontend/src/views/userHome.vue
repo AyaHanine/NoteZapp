@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from "vue"
+import { ref, computed, onMounted, watch } from "vue"
 import axios from "axios"
 import SidebarCategories from "@/components/SidebarCategories.vue"
 import NoteCard from "@/components/NoteCard.vue"
@@ -11,6 +11,7 @@ const selectedCategory = ref("All")
 const notes = ref([])
 const loading = ref(true)
 const scratchText = ref("")
+const searchQuery = ref("")
 
 const sectionTitle = computed(() => {
   if (selectedMenu.value === "notes") return "Toutes les notes"
@@ -44,6 +45,7 @@ const fetchNotes = async () => {
   }
   loading.value = false
 }
+
 onMounted(fetchNotes)
 
 function selectCategory(cat) {
@@ -78,6 +80,16 @@ const filteredNotes = computed(() => {
   if (selectedMenu.value === "category") {
     arr = notes.value.filter(note => note.category === selectedCategory.value && !note.deleted)
   }
+  // Recherche texte :
+  if (searchQuery.value && arr.length) {
+    const q = searchQuery.value.toLowerCase()
+    arr = arr.filter(note => {
+      const inTitle = note.title?.toLowerCase().includes(q)
+      const inContent = note.content?.toLowerCase().includes(q)
+      const inTags = Array.isArray(note.tags) && note.tags.some(tag => tag.toLowerCase().includes(q))
+      return inTitle || inContent || inTags
+    })
+  }
   // Trier par pinned d'abord puis par date
   return arr.slice().sort((a, b) => {
     if ((a.pinned || false) === (b.pinned || false)) {
@@ -87,7 +99,6 @@ const filteredNotes = computed(() => {
   })
 })
 
-// Carousel : épinglées en premier
 const mainNotes = computed(() =>
   notes.value
     .filter(
@@ -147,12 +158,13 @@ function removeNoteFromList(noteId) {
       :categories="categories"
       :selectedCategory="selectedCategory"
       :selectedMenu="selectedMenu"
+      v-model:searchQuery="searchQuery"
       @select-category="selectCategory"
       @show-favorites="showFavorites"
       @show-trash="showTrash"
       @show-notes="showNotes"
       @new-note="newNote"
-    />
+/>
 
     <!-- MAIN -->
    <main class="flex-1 flex flex-col">
