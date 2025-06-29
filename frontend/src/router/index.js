@@ -45,8 +45,20 @@ const router = createRouter({
       name: 'category',
       component: Category,
       meta: { title: 'Catégorie - NoteZapp', showHeaderFooter: true }
-    }
-
+    },
+{
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/Login.vue'),
+      meta: { title: 'Connexion - NoteZapp', showHeaderFooter: true },
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('@/views/Register.vue'),
+      meta: { title: 'Inscription - NoteZapp', showHeaderFooter: true },
+    },
+  
   ],
 })
 
