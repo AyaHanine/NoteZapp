@@ -10,7 +10,7 @@
         "organisation",
         "révision"
       ],
-      "favorite": false,
+      "favorite": true,
       "pinned": true,
       "deleted": true
     },
@@ -77,7 +77,7 @@
         {
           "id": 2,
           "content": "Préparer le plan du projet",
-          "completed": true
+          "completed": false
         },
         {
           "id": 3,
@@ -85,7 +85,7 @@
           "completed": false
         }
       ],
-      "deleted": true
+      "deleted": false
     },
     {
       "id": "6",
@@ -138,8 +138,7 @@
         "test"
       ],
       "date": "2025-06-27T00:15:51.945Z",
-      "favorite": false,
-      "deleted": true
+      "favorite": true
     },
     {
       "id": "941b",
@@ -166,7 +165,9 @@
       "category": "Thoughts",
       "content": "<p>test</p>",
       "tags": [],
-      "date": "2025-06-27T01:14:45.588Z"
+      "date": "2025-06-27T01:14:45.588Z",
+      "favorite": true,
+      "pinned": false
     },
     {
       "id": "fca0",
@@ -184,7 +185,8 @@
       "content": "<p>okokok</p>",
       "tags": [],
       "date": "2025-06-27T01:15:18.988Z",
-      "favorite": true
+      "favorite": true,
+      "deleted": true
     },
     {
       "id": "bfc0",
@@ -197,71 +199,50 @@
         "kl,frfreml",
         "lke,dke,d"
       ],
-      "date": "2025-06-27T01:15:57.887Z"
+      "date": "2025-06-27T01:15:57.887Z",
+      "pinned": false
     },
     {
-      "id": "7de3",
-      "title": "test",
-      "category": "Planner",
-      "content": "<p>test</p>",
+      "id": "d420",
+      "title": "opl,k;m:",
+      "category": "Journal",
+      "content": "<p>oi,jkl;</p>",
       "tags": [],
-      "date": "2025-06-27T12:31:59.192Z"
+      "date": "2025-06-27T01:31:27.810Z",
+      "pinned": false,
+      "deleted": true
     },
     {
-      "id": "333e",
-      "title": "test botan",
-      "category": "TaskList",
-      "content": "<p>aaaaaaaaaaaaa</p>",
-      "tags": [],
-      "date": "2025-06-27T12:39:29.610Z",
-      "taskList": [
-        {
-          "id": 1751027965035,
-          "content": "xx",
-          "completed": true
-        },
-        {
-          "id": 1751027966660,
-          "content": "xx",
-          "completed": true
-        },
-        {
-          "id": 1751027968697,
-          "content": "2",
-          "completed": true
-        }
-      ]
+      "id": "3b23",
+      "title": "kloekdel",
+      "category": "Journal",
+      "content": "<p>okdokdeelz</p>",
+      "tags": [
+        "ddd",
+        "zzz",
+        "rrr"
+      ],
+      "date": "2025-06-28T15:59:17.652Z",
+      "pinned": false
     },
     {
-      "id": "8ead",
-      "title": "test",
-      "category": "TaskList",
-      "content": "<p>aaaaaaaaaa</p>",
+      "id": "97cb",
+      "title": "k1",
+      "category": "Journal",
+      "content": "<p>doeide</p>",
       "tags": [],
-      "date": "2025-06-27T12:51:36.715Z",
-      "taskList": [
-        {
-          "id": 1751028691072,
-          "content": "Ok",
-          "completed": false
-        }
-      ]
+      "date": "2025-06-28T16:02:52.979Z",
+      "pinned": false
     },
     {
-      "id": "d1e1",
-      "title": "aaa",
-      "category": "Planner",
-      "content": "<p>aaaaaaaaa</p>",
+      "id": "6385",
+      "title": "k2",
+      "category": "Journal",
+      "content": "<p>djejidjeod</p>",
       "tags": [],
-      "date": "2025-06-27T12:51:53.668Z"
-    },
-    {
-      "id": "18af",
-      "title": "ok",
-      "category": "Planner",
-      "content": "<p>ok</p>",
-      "tags": [],
-      "date": "2025-06-27T12:52:12.541Z"
+      "date": "2025-06-28T16:03:09.311Z",
+      "pinned": true,
+      "favorite": true
     }
   ]
 }

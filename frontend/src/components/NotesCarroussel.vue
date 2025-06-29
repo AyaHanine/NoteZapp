@@ -21,6 +21,7 @@
         style="width:370px; min-height:230px;"
         @favorite-updated="handleFavorite"
         @deleted="handleDeleted"
+         @pin-updated="handlePin"
       />
     </div>
 
@@ -45,8 +46,11 @@ const props = defineProps({
   notes: { type: Array, default: () => [] },
   maxVisible: { type: Number, default: 3 }
 })
-const emit = defineEmits(['favorite-updated', 'deleted'])
+const emit = defineEmits(['favorite-updated', 'deleted', 'pin-updated'])
 
+function handlePin(updatedNote) {
+  emit('pin-updated', updatedNote)
+}
 const currentStart = ref(0)
 
 const visibleNotes = computed(() =>
