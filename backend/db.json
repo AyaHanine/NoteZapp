@@ -284,5 +284,19 @@
       "date": "2025-06-29T10:50:30.199Z",
       "pinned": true
     }
+  ],
+  "users": [
+    {
+      "id": "8f92",
+      "username": "Hajar JAMAL",
+      "email": "hajarjamal5@gmail.com",
+      "password": "MERYEM"
+    },
+    {
+      "id": "346a",
+      "username": "znl MERY",
+      "email": "meryem@gmail.com",
+      "password": "meryem"
+    }
   ]
 }
