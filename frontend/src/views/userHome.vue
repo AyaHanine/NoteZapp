@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from "vue"
+import { ref, computed, onMounted, watch } from "vue"
 import axios from "axios"
 import SidebarCategories from "@/components/SidebarCategories.vue"
 import NoteCard from "@/components/NoteCard.vue"
@@ -11,6 +11,7 @@ const selectedCategory = ref("All")
 const notes = ref([])
 const loading = ref(true)
 const scratchText = ref("")
+const searchQuery = ref("")
 
 const sectionTitle = computed(() => {
   if (selectedMenu.value === "notes") return "Toutes les notes"
@@ -44,6 +45,7 @@ const fetchNotes = async () => {
   }
   loading.value = false
 }
+
 onMounted(fetchNotes)
 
 function selectCategory(cat) {
@@ -65,28 +67,53 @@ function newNote() {
 }
 
 const filteredNotes = computed(() => {
+  let arr = []
   if (selectedMenu.value === "notes") {
-    return notes.value.filter(note => !note.deleted)
+    arr = notes.value.filter(note => !note.deleted)
   }
   if (selectedMenu.value === "favorites") {
-    return notes.value.filter(note => note.favorite && !note.deleted)
+    arr = notes.value.filter(note => note.favorite && !note.deleted)
   }
   if (selectedMenu.value === "trash") {
-    return notes.value.filter(note => note.deleted)
+    arr = notes.value.filter(note => note.deleted)
   }
   if (selectedMenu.value === "category") {
-    return notes.value.filter(note => note.category === selectedCategory.value && !note.deleted)
+    arr = notes.value.filter(note => note.category === selectedCategory.value && !note.deleted)
   }
-  return []
+  // Recherche texte :
+  if (searchQuery.value && arr.length) {
+    const q = searchQuery.value.toLowerCase()
+    arr = arr.filter(note => {
+      const inTitle = note.title?.toLowerCase().includes(q)
+      const inContent = note.content?.toLowerCase().includes(q)
+      const inTags = Array.isArray(note.tags) && note.tags.some(tag => tag.toLowerCase().includes(q))
+      return inTitle || inContent || inTags
+    })
+  }
+  // Trier par pinned d'abord puis par date
+  return arr.slice().sort((a, b) => {
+    if ((a.pinned || false) === (b.pinned || false)) {
+      return new Date(b.date) - new Date(a.date)
+    }
+    return (b.pinned || false) - (a.pinned || false)
+  })
 })
 
 const mainNotes = computed(() =>
-  notes.value.filter(
-    note =>
-      !note.deleted &&
-      !["Planner", "TaskList"].includes(note.category)
-  )
+  notes.value
+    .filter(
+      note =>
+        !note.deleted &&
+        !["Planner", "TaskList"].includes(note.category)
+    )
+    .slice().sort((a, b) => {
+      if ((a.pinned || false) === (b.pinned || false)) {
+        return new Date(b.date) - new Date(a.date)
+      }
+      return (b.pinned || false) - (a.pinned || false)
+    })
 )
+
 const planningNotes = computed(() =>
   notes.value.filter(
     note =>
@@ -112,6 +139,13 @@ function updateFavorite(updatedNote) {
   }
 }
 
+function updatePin(updatedNote) {
+  const idx = notes.value.findIndex(n => n.id === updatedNote.id)
+  if (idx !== -1) {
+    notes.value[idx].pinned = updatedNote.pinned
+  }
+}
+
 function removeNoteFromList(noteId) {
   notes.value = notes.value.filter(n => n.id !== noteId)
 }
@@ -124,12 +158,13 @@ function removeNoteFromList(noteId) {
       :categories="categories"
       :selectedCategory="selectedCategory"
       :selectedMenu="selectedMenu"
+      v-model:searchQuery="searchQuery"
       @select-category="selectCategory"
       @show-favorites="showFavorites"
       @show-trash="showTrash"
       @show-notes="showNotes"
       @new-note="newNote"
-    />
+/>
 
     <!-- MAIN -->
    <main class="flex-1 flex flex-col">
@@ -146,41 +181,15 @@ function removeNoteFromList(noteId) {
             <div v-if="filteredNotes.length === 0" class="text-copper-400 mb-4">
               Aucune note trouvée.
             </div>
-            <!-- 3 notes par ligne même en corbeille -->
             <div v-else class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              <div
+              <NoteCard
                 v-for="note in filteredNotes"
                 :key="note.id"
-                class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5"
-              >
-                <div class="flex items-center gap-3 mb-1">
-      <span class="text-copper-500 text-xl">
-        {{ note.category === 'TaskList' ? '✅' : '📅' }}
-      </span>
-                  <span class="font-bold text-copper-900 text-lg">
-        {{ note.title }}
-      </span>
-                  <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
-                </div>
-                <div class="text-copper-800 mb-2" v-html="note.content"></div>
-                <ul v-if="note.category === 'TaskList' && note.taskList" class="pl-3 space-y-1">
-                  <li
-                    v-for="task in note.taskList"
-                    :key="task.id"
-                    class="flex items-center gap-2 text-copper-700"
-                  >
-                    <input
-                      type="checkbox"
-                      :checked="task.completed"
-                      @change="toggleTask(note, task)"
-                      class="accent-copper-500 w-4 h-4"
-                    />
-                    <span :class="task.completed ? 'line-through text-copper-400' : ''">
-          {{ task.content }}
-        </span>
-                  </li>
-                </ul>
-              </div>
+                :note="note"
+                @favorite-updated="updateFavorite"
+                @pin-updated="updatePin"
+                @deleted="removeNoteFromList"
+              />
             </div>
           </div>
         </template>
@@ -188,7 +197,12 @@ function removeNoteFromList(noteId) {
         <!-- TOUTES NOTES -->
         <template v-else>
           <div class="mb-7">
-            <NotesCarroussel :notes="mainNotes" @favorite-updated="updateFavorite" @deleted="removeNoteFromList" />
+            <NotesCarroussel
+              :notes="mainNotes"
+              @favorite-updated="updateFavorite"
+              @pin-updated="updatePin"
+              @deleted="removeNoteFromList"
+            />
           </div>
 
           <div class="w-full flex items-center my-7">

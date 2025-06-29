@@ -166,7 +166,8 @@
       "category": "Thoughts",
       "content": "<p>test</p>",
       "tags": [],
-      "date": "2025-06-27T01:14:45.588Z"
+      "date": "2025-06-27T01:14:45.588Z",
+      "deleted": true
     },
     {
       "id": "fca0",
@@ -184,7 +185,8 @@
       "content": "<p>okokok</p>",
       "tags": [],
       "date": "2025-06-27T01:15:18.988Z",
-      "favorite": true
+      "favorite": true,
+      "deleted": true
     },
     {
       "id": "bfc0",
@@ -262,6 +264,51 @@
       "content": "<p>ok</p>",
       "tags": [],
       "date": "2025-06-27T12:52:12.541Z"
+    },
+    {
+      "id": "410f",
+      "title": "bonjour",
+      "category": "Journal",
+      "content": "<p>bonjour meryem</p>",
+      "tags": [],
+      "date": "2025-06-28T18:48:50.036Z",
+      "favorite": true
+    },
+    {
+      "id": "e198",
+      "title": "nuit",
+      "category": "Journal",
+      "content": "<p>il est 00 46</p>",
+      "tags": [],
+      "date": "2025-06-28T22:46:52.291Z",
+      "favorite": true,
+      "pinned": true
+    }
+  ],
+  "users": [
+    {
+      "id": "de7b",
+      "username": "Hajar JAMAL",
+      "email": "hajarjamal05@gmail.com",
+      "password": "meryemza"
+    },
+    {
+      "id": "1596",
+      "username": "meryem zainoul",
+      "email": "zainoulmeryem1@gmail.com",
+      "password": "Meryem"
+    },
+    {
+      "id": "7b8e",
+      "username": "hanine aya",
+      "email": "aya@gmail.com",
+      "password": "ayaaya"
+    },
+    {
+      "id": "3cca",
+      "username": "hiba hiba",
+      "email": "hiba@gmail.com",
+      "password": "hibahiba"
     }
   ]
 }

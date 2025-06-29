@@ -14,7 +14,7 @@ import Footer from "./components/Footer.vue";
             
             // Met à jour le titre de la page quand la route change
             const updatePageTitle = () => {
-                const title = route.meta.title || 'SyncTrip';
+                const title = route.meta.title || 'NoteZapp';
                 document.title = title;
             };
             
