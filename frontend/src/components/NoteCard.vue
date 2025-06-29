@@ -1,6 +1,6 @@
 <template>
   <div class="note-card-fixed relative bg-white rounded-2xl shadow p-6 flex flex-col">
-  
+
 
   <!-- Bloc étoile favoris + pin rouge -->
 <div class="absolute top-4 right-4 flex items-center gap-2">
@@ -163,7 +163,10 @@ async function handlePin() {
 async function deleteNote() {
   if (confirm("Supprimer cette note ?")) {
     try {
-      await axios.patch(`http://localhost:3001/notes/${props.note.id}`, { deleted: true })
+      await axios.patch(`http://localhost:3001/notes/${props.note.id}`, {
+        deleted: true,
+        deletionDate: new Date().toISOString()
+      })
       emit("deleted", props.note.id)
     } catch (e) {
       alert("Erreur lors de la suppression de la note")

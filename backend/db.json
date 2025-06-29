@@ -12,7 +12,8 @@
       ],
       "favorite": true,
       "pinned": true,
-      "deleted": true
+      "deleted": true,
+      "deletionDate": null
     },
     {
       "id": "2",
@@ -26,7 +27,8 @@
       ],
       "favorite": false,
       "pinned": false,
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "3",
@@ -40,7 +42,8 @@
       ],
       "favorite": false,
       "pinned": false,
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "4",
@@ -54,7 +57,8 @@
       ],
       "favorite": false,
       "pinned": false,
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "5",
@@ -72,17 +76,17 @@
         {
           "id": 1,
           "content": "Terminer le devoir de math",
-          "completed": false
+          "completed": true
         },
         {
           "id": 2,
           "content": "Préparer le plan du projet",
-          "completed": false
+          "completed": true
         },
         {
           "id": 3,
           "content": "Faire les courses",
-          "completed": false
+          "completed": true
         }
       ],
       "deleted": false
@@ -99,7 +103,8 @@
       ],
       "favorite": false,
       "pinned": false,
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "7",
@@ -113,7 +118,8 @@
       ],
       "favorite": false,
       "pinned": false,
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "8",
@@ -127,7 +133,8 @@
       ],
       "favorite": false,
       "pinned": false,
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "c55f",
@@ -138,7 +145,8 @@
         "test"
       ],
       "date": "2025-06-27T00:15:51.945Z",
-      "favorite": true
+      "favorite": false,
+      "pinned": true
     },
     {
       "id": "941b",
@@ -147,7 +155,8 @@
       "content": "<p>test test tes</p>",
       "tags": [],
       "date": "2025-06-27T00:31:31.207Z",
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "a4d1",
@@ -157,7 +166,8 @@
       "tags": [],
       "date": "2025-06-27T00:38:10.623Z",
       "favorite": false,
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "0788",
@@ -166,8 +176,10 @@
       "content": "<p>test</p>",
       "tags": [],
       "date": "2025-06-27T01:14:45.588Z",
-      "favorite": true,
-      "pinned": false
+      "favorite": false,
+      "pinned": false,
+      "deleted": true,
+      "deletionDate": "2025-06-29T10:42:59.980Z"
     },
     {
       "id": "fca0",
@@ -176,7 +188,9 @@
       "content": "<p>mmmm</p>",
       "tags": [],
       "date": "2025-06-27T01:15:01.354Z",
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null,
+      "favorite": true
     },
     {
       "id": "d48e",
@@ -186,7 +200,8 @@
       "tags": [],
       "date": "2025-06-27T01:15:18.988Z",
       "favorite": true,
-      "deleted": true
+      "deleted": false,
+      "deletionDate": null
     },
     {
       "id": "bfc0",
@@ -200,7 +215,8 @@
         "lke,dke,d"
       ],
       "date": "2025-06-27T01:15:57.887Z",
-      "pinned": false
+      "pinned": false,
+      "favorite": true
     },
     {
       "id": "d420",
@@ -209,8 +225,10 @@
       "content": "<p>oi,jkl;</p>",
       "tags": [],
       "date": "2025-06-27T01:31:27.810Z",
-      "pinned": false,
-      "deleted": true
+      "pinned": true,
+      "deleted": true,
+      "deletionDate": "2025-06-29T10:44:06.005Z",
+      "favorite": true
     },
     {
       "id": "3b23",
@@ -223,7 +241,9 @@
         "rrr"
       ],
       "date": "2025-06-28T15:59:17.652Z",
-      "pinned": false
+      "pinned": false,
+      "deleted": true,
+      "deletionDate": "2025-06-29T10:42:47.256Z"
     },
     {
       "id": "97cb",
@@ -231,8 +251,10 @@
       "category": "Journal",
       "content": "<p>doeide</p>",
       "tags": [],
-      "date": "2025-06-28T16:02:52.979Z",
-      "pinned": false
+      "date": "2025-08-28T16:02:52.979Z",
+      "pinned": false,
+      "deleted": true,
+      "deletionDate": "2025-06-29T10:34:50.104Z"
     },
     {
       "id": "6385",
@@ -242,7 +264,25 @@
       "tags": [],
       "date": "2025-06-28T16:03:09.311Z",
       "pinned": true,
-      "favorite": true
+      "favorite": true,
+      "deleted": true
+    },
+    {
+      "id": "2d06",
+      "title": "test",
+      "category": "Planner",
+      "content": "<p>test</p>",
+      "tags": [],
+      "date": "2025-06-29T10:46:23.886Z"
+    },
+    {
+      "id": "fabb",
+      "title": "test",
+      "category": "Thoughts",
+      "content": "<p>test</p>",
+      "tags": [],
+      "date": "2025-06-29T10:50:30.199Z",
+      "pinned": true
     }
   ]
 }
