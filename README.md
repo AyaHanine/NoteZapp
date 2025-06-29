@@ -174,7 +174,7 @@ Plusieurs modifs sont à prévoir pour cette page, notamment l'affichage de l'ed
 1. **Authentification**(en cours par Meryem)  
    L’utilisateur clique sur « Commencer gratuitement » et est redirigé vers la page d’authentification. Une fois authentifié, il accède à son espace personnel pour gérer ses notes.
 
-2. **Gestion des TaskList**  
+2. **Gestion des TaskList**  ✅ *Déjà fait*
    Une des catégories de notes proposées est la TaskList, présentée sous forme de To-Do List. Lors de la création, l’utilisateur saisit les tâches à réaliser. Après ajout, la TaskList doit s’afficher différemment des autres notes, en format checklist interactive (avec possibilité de cocher/décocher chaque tâche).  
    > *Pour l’instant, l’affichage est statique.*  
    ![image](https://github.com/user-attachments/assets/1a72e8ac-3ce2-4897-a219-8489a88dde18)
@@ -187,28 +187,28 @@ Plusieurs modifs sont à prévoir pour cette page, notamment l'affichage de l'ed
 4. **Modification des notes**
    Permettre la modification d’une note via l’icône dédiée sur la NoteCard.
 
-6. *en cours* (🚧) **Affichage d’une note**
+6.  **Affichage d’une note**
    
    Permettre l’affichage détaillé d’une note au clic.
 
-8. *en cours* (🚧) **Suppression définitive des notes**
+8.  **Suppression définitive des notes** ✅ *Déjà fait*
    
    Actuellement, seule la suppression douce (déplacement en corbeille) est implémentée. Il faudra permettre la suppression définitive d’une note depuis la corbeille (action irréversible).
 
-10. *en cours* (🚧) **Restauration de notes depuis la corbeille**
+10.  **Restauration de notes depuis la corbeille** ✅ *Déjà fait*
     
    Permettre la récupération d’une note supprimée depuis la corbeille.
 
-12. **Suppression automatique après délai**  
+12. **Suppression automatique après délai**  ✅ *Déjà fait*
    Mettre en place un timer : après 14 jours en corbeille, une note est supprimée définitivement si elle n’a pas été restaurée.
 
-13. **Recherche de notes**  
+13. **Recherche de notes**  ✅ *Déjà fait*
    Ajouter une barre de recherche permettant de filtrer les notes par :
    - Titre
    - Tags
    - Mots-clés présents dans le contenu
 
-11. **Gestion des notes épinglées**  
+11. **Gestion des notes épinglées**  ✅ *Déjà fait*
     Permettre d’épingler une note grâce à l’icône « pin » sur la NoteCard. Les notes épinglées sont affichées en priorité.
 
 12. **ScratchPad**  

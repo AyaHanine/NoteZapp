@@ -1,16 +1,288 @@
 {
   "notes": [
     {
-      "id": 1,
-      "title": "Ma première note",
-      "content": "Ceci est une note d'exemple.",
-      "category": "Perso",
-      "isFavorite": false,
-      "createdAt": "2024-06-01T12:00:00Z"
+      "id": "1",
+      "title": "Plan de révision",
+      "content": "Organisation de la semaine et planning des tâches principales.",
+      "date": "2024-06-26T09:00:00Z",
+      "category": "Planner",
+      "tags": [
+        "organisation",
+        "révision"
+      ],
+      "favorite": true,
+      "pinned": true,
+      "deleted": true,
+      "deletionDate": null
+    },
+    {
+      "id": "2",
+      "title": "Idées de roman",
+      "content": "Penser à la scène d’intro, développer le personnage principal.",
+      "date": "2024-06-20T14:30:00Z",
+      "category": "Thoughts",
+      "tags": [
+        "roman",
+        "écriture"
+      ],
+      "favorite": false,
+      "pinned": false,
+      "deleted": false,
+      "deletionDate": null
+    },
+    {
+      "id": "3",
+      "title": "Cours de math - Chap 5",
+      "content": "Résumé sur les suites arithmétiques, exercices à refaire.",
+      "date": "2024-06-15T09:45:00Z",
+      "category": "ClassNotes",
+      "tags": [
+        "math",
+        "cours"
+      ],
+      "favorite": false,
+      "pinned": false,
+      "deleted": false,
+      "deletionDate": null
+    },
+    {
+      "id": "4",
+      "title": "Journal du 26 juin",
+      "content": "Belle journée, beaucoup avancé sur le projet NoteZapp.",
+      "date": "2024-06-26T22:15:00Z",
+      "category": "Journal",
+      "tags": [
+        "perso",
+        "journal"
+      ],
+      "favorite": false,
+      "pinned": false,
+      "deleted": false,
+      "deletionDate": null
+    },
+    {
+      "id": "5",
+      "title": "Tasklist Semaine",
+      "content": "Liste des choses à faire cette semaine.",
+      "date": "2024-06-24T10:00:00Z",
+      "category": "TaskList",
+      "tags": [
+        "tâches",
+        "hebdo"
+      ],
+      "favorite": false,
+      "pinned": false,
+      "taskList": [
+        {
+          "id": 1,
+          "content": "Terminer le devoir de math",
+          "completed": true
+        },
+        {
+          "id": 2,
+          "content": "Préparer le plan du projet",
+          "completed": true
+        },
+        {
+          "id": 3,
+          "content": "Faire les courses",
+          "completed": true
+        }
+      ],
+      "deleted": false
+    },
+    {
+      "id": "6",
+      "title": "Document - Processus API",
+      "content": "Spécifications pour l’API de prise de notes, endpoints principaux à implémenter.",
+      "date": "2024-06-22T13:10:00Z",
+      "category": "Documents",
+      "tags": [
+        "api",
+        "tech"
+      ],
+      "favorite": false,
+      "pinned": false,
+      "deleted": false,
+      "deletionDate": null
+    },
+    {
+      "id": "7",
+      "title": "Idées de test",
+      "content": "Penser à la scène d’intro, développer le personnage principal.",
+      "date": "2024-06-20T14:30:00Z",
+      "category": "Thoughts",
+      "tags": [
+        "roman",
+        "écriture"
+      ],
+      "favorite": false,
+      "pinned": false,
+      "deleted": false,
+      "deletionDate": null
+    },
+    {
+      "id": "8",
+      "title": "Idées de test",
+      "content": "Penser à la scène d’intro, développer le personnage principal.",
+      "date": "2024-06-20T14:30:00Z",
+      "category": "Thoughts",
+      "tags": [
+        "roman",
+        "écriture"
+      ],
+      "favorite": false,
+      "pinned": false,
+      "deleted": false,
+      "deletionDate": null
+    },
+    {
+      "id": "c55f",
+      "category": "TaskList",
+      "title": "test ajout",
+      "content": "djeoifjeklfc,edvfefvjiofkd",
+      "tags": [
+        "test"
+      ],
+      "date": "2025-06-27T00:15:51.945Z",
+      "favorite": false,
+      "pinned": true
+    },
+    {
+      "id": "941b",
+      "title": "test titre",
+      "category": "Journal",
+      "content": "<p>test test tes</p>",
+      "tags": [],
+      "date": "2025-06-27T00:31:31.207Z",
+      "deleted": false,
+      "deletionDate": null
+    },
+    {
+      "id": "a4d1",
+      "title": "pllpl",
+      "category": "ClassNotes",
+      "content": "<p>plol</p>",
+      "tags": [],
+      "date": "2025-06-27T00:38:10.623Z",
+      "favorite": false,
+      "deleted": false,
+      "deletionDate": null
+    },
+    {
+      "id": "0788",
+      "title": "test",
+      "category": "Thoughts",
+      "content": "<p>test</p>",
+      "tags": [],
+      "date": "2025-06-27T01:14:45.588Z",
+      "favorite": false,
+      "pinned": false,
+      "deleted": true,
+      "deletionDate": "2025-06-29T10:42:59.980Z"
+    },
+    {
+      "id": "fca0",
+      "title": "mmmm",
+      "category": "ClassNotes",
+      "content": "<p>mmmm</p>",
+      "tags": [],
+      "date": "2025-06-27T01:15:01.354Z",
+      "deleted": false,
+      "deletionDate": null,
+      "favorite": true
+    },
+    {
+      "id": "d48e",
+      "title": "okokok",
+      "category": "Documents",
+      "content": "<p>okokok</p>",
+      "tags": [],
+      "date": "2025-06-27T01:15:18.988Z",
+      "favorite": true,
+      "deleted": false,
+      "deletionDate": null
+    },
+    {
+      "id": "bfc0",
+      "title": "ofk,lredf;re",
+      "category": "Journal",
+      "content": "<p>odkkr,feldrfkldf, ;ed</p>",
+      "tags": [
+        "kl,rfrlkf",
+        "kjnr,frlkf",
+        "kl,frfreml",
+        "lke,dke,d"
+      ],
+      "date": "2025-06-27T01:15:57.887Z",
+      "pinned": false,
+      "favorite": true
+    },
+    {
+      "id": "d420",
+      "title": "opl,k;m:",
+      "category": "Journal",
+      "content": "<p>oi,jkl;</p>",
+      "tags": [],
+      "date": "2025-06-27T01:31:27.810Z",
+      "pinned": true,
+      "deleted": true,
+      "deletionDate": "2025-06-29T10:44:06.005Z",
+      "favorite": true
+    },
+    {
+      "id": "3b23",
+      "title": "kloekdel",
+      "category": "Journal",
+      "content": "<p>okdokdeelz</p>",
+      "tags": [
+        "ddd",
+        "zzz",
+        "rrr"
+      ],
+      "date": "2025-06-28T15:59:17.652Z",
+      "pinned": false,
+      "deleted": true,
+      "deletionDate": "2025-06-29T10:42:47.256Z"
+    },
+    {
+      "id": "97cb",
+      "title": "k1",
+      "category": "Journal",
+      "content": "<p>doeide</p>",
+      "tags": [],
+      "date": "2025-08-28T16:02:52.979Z",
+      "pinned": false,
+      "deleted": true,
+      "deletionDate": "2025-06-29T10:34:50.104Z"
+    },
+    {
+      "id": "6385",
+      "title": "k2",
+      "category": "Journal",
+      "content": "<p>djejidjeod</p>",
+      "tags": [],
+      "date": "2025-06-28T16:03:09.311Z",
+      "pinned": true,
+      "favorite": true,
+      "deleted": true
+    },
+    {
+      "id": "2d06",
+      "title": "test",
+      "category": "Planner",
+      "content": "<p>test</p>",
+      "tags": [],
+      "date": "2025-06-29T10:46:23.886Z"
+    },
+    {
+      "id": "fabb",
+      "title": "test",
+      "category": "Thoughts",
+      "content": "<p>test</p>",
+      "tags": [],
+      "date": "2025-06-29T10:50:30.199Z",
+      "pinned": true
     }
-  ],
-  "categories": [
-    { "id": 1, "name": "Perso" },
-    { "id": 2, "name": "Travail" }
   ]
 }

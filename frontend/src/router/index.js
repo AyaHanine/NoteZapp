@@ -1,5 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Landing from '../views/landing.vue'
+import UserHome from '@/views/userHome.vue'
+import AddNotePage from '@/views/AddNotePage.vue'
+import Trash from '@/views/Trash.vue'
+import Favorites from '@/views/Favorites.vue'
+import Category from '@/views/Category.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,16 +13,40 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: Landing,
+      meta: { title: 'Accueil - NoteZapp', showHeaderFooter: true }
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      path: '/user-home',
+      name: 'userHome',
+      component: UserHome,
+      meta: { title: 'Your Personal Space - NoteZapp', showHeaderFooter: true }
     },
+    {
+      path: '/notes/add',
+      name: 'add-note',
+      component: AddNotePage,
+      meta: { title: 'Feel Free - NoteZapp', showHeaderFooter: true }
+    },
+    {
+      path: '/trash',
+      name: 'trash',
+      component: Trash,
+      meta: { title: 'Corbeille - NoteZapp', showHeaderFooter: true }
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: Favorites,
+      meta: { title: 'Favoris - NoteZapp', showHeaderFooter: true }
+    },
+    {
+      path: '/category/:name',
+      name: 'category',
+      component: Category,
+      meta: { title: 'Catégorie - NoteZapp', showHeaderFooter: true }
+    }
+
   ],
 })
 
