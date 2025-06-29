@@ -37,20 +37,20 @@
         label="Notes"
         icon="mdi-note-multiple-outline"
         :active="selectedMenu==='notes'"
-        @click="$emit('show-notes')"
+        @click="goToNotes"
       />
       <SidebarItem
         label="Favoris"
         icon="mdi-star-outline"
         :active="selectedMenu==='favorites'"
-        @click="$emit('show-favorites')"
+        @click="goToFavorites"
       />
       <SidebarItem
         label="Corbeille"
         icon="mdi-trash-can-outline"
         :active="selectedMenu==='trash'"
         :danger="true"
-        @click="$emit('show-trash')"
+        @click="goToTrash"
       />
 
       <div class="mt-6 mb-2 px-2 text-xs text-copper-400 font-bold uppercase tracking-wide">Catégories</div>
@@ -61,7 +61,7 @@
           :label="cat"
           icon="mdi-folder-outline"
           :active="selectedMenu==='category' && selectedCategory===cat"
-          @click="$emit('select-category', cat)"
+          @click="goToCategory(cat)"
         />
       </div>
     </nav>
@@ -78,8 +78,23 @@ defineEmits(['update:searchQuery'])
 
 const router = useRouter()
 
+function goToNotes() {
+  router.push('/user-home')
+}
+
 function goToAddNote() {
   router.push('/notes/add')
 }
 
+function goToTrash() {
+  router.push('/trash')
+}
+
+function goToFavorites() {
+  router.push('/favorites')
+}
+
+function goToCategory(cat) {
+  router.push(`/category/${cat}`)
+}
 </script>

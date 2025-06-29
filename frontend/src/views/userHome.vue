@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, watch } from "vue"
+import { ref, computed, onMounted } from "vue"
 import axios from "axios"
 import SidebarCategories from "@/components/SidebarCategories.vue"
 import NoteCard from "@/components/NoteCard.vue"
@@ -16,7 +16,6 @@ const searchQuery = ref("")
 const sectionTitle = computed(() => {
   if (selectedMenu.value === "notes") return "Toutes les notes"
   if (selectedMenu.value === "favorites") return "Favoris"
-  if (selectedMenu.value === "trash") return "Corbeille"
   if (selectedMenu.value === "category") return selectedCategory.value
   return ""
 })
@@ -48,16 +47,7 @@ const fetchNotes = async () => {
 
 onMounted(fetchNotes)
 
-function selectCategory(cat) {
-  selectedMenu.value = "category"
-  selectedCategory.value = cat
-}
-function showFavorites() {
-  selectedMenu.value = "favorites"
-}
-function showTrash() {
-  selectedMenu.value = "trash"
-}
+// Fonction showNotes utile si tu veux garder le bouton "Notes" actif sur /user-home
 function showNotes() {
   selectedMenu.value = "notes"
   selectedCategory.value = "All"
@@ -73,9 +63,6 @@ const filteredNotes = computed(() => {
   }
   if (selectedMenu.value === "favorites") {
     arr = notes.value.filter(note => note.favorite && !note.deleted)
-  }
-  if (selectedMenu.value === "trash") {
-    arr = notes.value.filter(note => note.deleted)
   }
   if (selectedMenu.value === "category") {
     arr = notes.value.filter(note => note.category === selectedCategory.value && !note.deleted)
@@ -107,11 +94,11 @@ const mainNotes = computed(() =>
         !["Planner", "TaskList"].includes(note.category)
     )
     .slice().sort((a, b) => {
-      if ((a.pinned || false) === (b.pinned || false)) {
-        return new Date(b.date) - new Date(a.date)
-      }
-      return (b.pinned || false) - (a.pinned || false)
-    })
+    if ((a.pinned || false) === (b.pinned || false)) {
+      return new Date(b.date) - new Date(a.date)
+    }
+    return (b.pinned || false) - (a.pinned || false)
+  })
 )
 
 const planningNotes = computed(() =>
@@ -159,15 +146,12 @@ function removeNoteFromList(noteId) {
       :selectedCategory="selectedCategory"
       :selectedMenu="selectedMenu"
       v-model:searchQuery="searchQuery"
-      @select-category="selectCategory"
-      @show-favorites="showFavorites"
-      @show-trash="showTrash"
       @show-notes="showNotes"
       @new-note="newNote"
-/>
+    />
 
     <!-- MAIN -->
-   <main class="flex-1 flex flex-col">
+    <main class="flex-1 flex flex-col">
       <section class="p-8 max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold mb-6 text-copper-900">
           {{ sectionTitle }}
@@ -175,8 +159,8 @@ function removeNoteFromList(noteId) {
 
         <div v-if="loading" class="text-copper-700 py-10 text-lg">Chargement…</div>
 
-        <!-- CATEGORIES/FAVORIS/CORBEILLE -->
-        <template v-if="selectedMenu === 'category' || selectedMenu === 'favorites' || selectedMenu === 'trash'">
+        <!-- CATEGORIES/FAVORIS -->
+        <template v-if="selectedMenu === 'category' || selectedMenu === 'favorites'">
           <div>
             <div v-if="filteredNotes.length === 0" class="text-copper-400 mb-4">
               Aucune note trouvée.
@@ -264,8 +248,8 @@ function removeNoteFromList(noteId) {
                       class="accent-copper-500 w-4 h-4"
                     />
                     <span :class="task.completed ? 'line-through text-copper-400' : ''">
-      {{ task.content }}
-    </span>
+                      {{ task.content }}
+                    </span>
                   </li>
                 </ul>
               </div>
