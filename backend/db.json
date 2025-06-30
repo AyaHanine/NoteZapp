@@ -385,6 +385,17 @@
       "content": "<p>bonjour</p>",
       "tags": [],
       "date": "2025-06-30T21:01:10.495Z"
+    },
+    {
+      "id": "c1eb",
+      "title": "Note rapide",
+      "content": "Test botan",
+      "category": "ScratchPad",
+      "tags": [],
+      "date": "2025-06-30T21:46:28.143Z",
+      "favorite": false,
+      "deleted": false,
+      "pinned": false
     }
   ],
   "users": [
@@ -405,6 +416,12 @@
       "username": "Hajar JAMAL",
       "email": "hajarjamal05@gmail.com",
       "password": "meryem"
+    },
+    {
+      "id": "7f7a",
+      "username": "Test Test",
+      "email": "byilmaz1@myges.fr",
+      "password": "byilmaz1@myges.fr"
     }
   ]
 }

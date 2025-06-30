@@ -70,8 +70,7 @@ Actuellement, lors de la création d’une note, l’utilisateur saisit d’abor
 ---
 
 ### ScratchPad
-- Bloc de prise de notes rapide  
-  🚫 *Logique non encore mise en place*
+- Bloc de prise de notes rapide ✅ *Déjà fait*
 
 ---
 
@@ -212,7 +211,7 @@ Plusieurs modifs sont à prévoir pour cette page, notamment l'affichage de l'ed
     Permettre d’épingler une note grâce à l’icône « pin » sur la NoteCard. Les notes épinglées sont affichées en priorité.
 
 12. **ScratchPad**  
-    Implémenter et intégrer la logique du scratchpad.
+    Implémenter et intégrer la logique du scratchpad. ✅ *Déjà fait*
 
 
 
