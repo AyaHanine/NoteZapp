@@ -6,7 +6,6 @@ import Trash from '@/views/Trash.vue'
 import Favorites from '@/views/Favorites.vue'
 import Category from '@/views/Category.vue'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -46,20 +45,25 @@ const router = createRouter({
       component: Category,
       meta: { title: 'Catégorie - NoteZapp', showHeaderFooter: true }
     },
-{
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/Login.vue'),
-      meta: { title: 'Connexion - NoteZapp', showHeaderFooter: true },
+      meta: { title: 'Connexion - NoteZapp', showHeaderFooter: true }
     },
     {
       path: '/register',
       name: 'register',
       component: () => import('@/views/Register.vue'),
-      meta: { title: 'Inscription - NoteZapp', showHeaderFooter: true },
+      meta: { title: 'Inscription - NoteZapp', showHeaderFooter: true }
     },
-  
-  ],
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('@/views/UserProfile.vue'),
+      meta: { title: 'Mon Profil - NoteZapp', showHeaderFooter: true }
+    }
+  ]
 })
 
 export default router
