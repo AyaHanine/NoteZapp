@@ -61,6 +61,17 @@
         </svg>
       </button>
 
+      <!-- Bouton Modifier (icône crayon) -->
+      <button
+        class="focus:outline-none"
+        @click.stop="editNote"
+        aria-label="Modifier la note"
+      >
+        <svg class="w-6 h-6 text-copper-300 hover:text-copper-500 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-2.828 0L9 13z"/>
+        </svg>
+      </button>
+
       <!-- 3 points menu -->
       <div class="relative">
         <button
@@ -103,6 +114,7 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import { ref, onMounted, onBeforeUnmount } from "vue"
 import axios from "axios"
 const props = defineProps({
@@ -114,6 +126,11 @@ const props = defineProps({
 })
 const emit = defineEmits(["favorite-updated", "deleted", "pin-updated"])
 const showMenu = ref(false)
+const router = useRouter()
+
+function editNote() {
+  router.push(`/notes/edit/${props.note.id}`)
+}
 
 function handleClickOutside(event) {
   if (!event.target.closest('.note-card-fixed')) {

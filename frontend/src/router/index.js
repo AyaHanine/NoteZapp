@@ -5,6 +5,10 @@ import AddNotePage from '@/views/AddNotePage.vue'
 import Trash from '@/views/Trash.vue'
 import Favorites from '@/views/Favorites.vue'
 import Category from '@/views/Category.vue'
+import Login from '@/views/Login.vue'
+import Register from '@/views/Register.vue'
+import UserProfile from '@/views/UserProfile.vue'
+import EditNotePage from '@/views/EditNotePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,21 +52,27 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/Login.vue'),
+      component: Login,
       meta: { title: 'Connexion - NoteZapp', showHeaderFooter: true }
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('@/views/Register.vue'),
+      component: Register,
       meta: { title: 'Inscription - NoteZapp', showHeaderFooter: true }
     },
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('@/views/UserProfile.vue'),
+      component: UserProfile,
       meta: { title: 'Mon Profil - NoteZapp', showHeaderFooter: true }
-    }
+    },
+    {
+      path: '/notes/edit/:id',
+      name: 'EditNote',
+      component: EditNotePage,
+      meta: { title: 'Modifier la note - NoteZapp', showHeaderFooter: true }
+    },
   ]
 })
 

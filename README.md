@@ -20,7 +20,7 @@ Elle permet la création, l’organisation, la catégorisation et la gestion de 
 - **Catégories** disponibles à la création :
   - **Journal**, **Document**, **ClassNotes**, **Thoughts**    ✅ *Déjà fait*
     
-    ➡️ *Création et affichage déjà mis en place* (**modification non encore réalisée**)
+    ➡️ *Création et affichage déjà mis en place* ✅ *Déjà fait*
   - **TaskList**  
     ➡️ *Ajout spécifique d’une checklist (liste de tâches à cocher).*
     
@@ -47,6 +47,7 @@ Actuellement, lors de la création d’une note, l’utilisateur saisit d’abor
 
 #### Modification
 - Modification des notes  
+  (Réaliser juste pour les notes dans la home)
   🚫 *Pas encore réalisée* pour toutes les catégories
 
 #### Suppression
