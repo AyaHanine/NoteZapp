@@ -194,16 +194,12 @@
       "userId": "346a"
     },
     {
-      "id": "fca0",
-      "title": "mmmm",
+      "title": "mmmmX",
       "category": "ClassNotes",
-      "content": "<p>mmmm</p>",
+      "content": "<p>mmmmX</p>",
       "tags": [],
       "date": "2025-06-27T01:15:01.354Z",
-      "deleted": false,
-      "deletionDate": null,
-      "favorite": true,
-      "userId": "8f92"
+      "id": "fca0"
     },
     {
       "id": "d48e",
@@ -298,17 +294,12 @@
       "userId": "346a"
     },
     {
-      "id": "fabb",
       "title": "test",
       "category": "Thoughts",
-      "content": "<p>test</p>",
+      "content": "<p>testok</p>",
       "tags": [],
-      "date": "2025-06-29T10:50:30.199Z",
-      "pinned": false,
-      "deleted": false,
-      "deletionDate": null,
-      "favorite": true,
-      "userId": "8f92"
+      "date": "2025-06-30T22:16:50.536Z",
+      "id": "fabb"
     },
     {
       "id": "3820",
@@ -387,15 +378,12 @@
       "date": "2025-06-30T21:01:10.495Z"
     },
     {
-      "id": "c1eb",
-      "title": "Note rapide",
-      "content": "Test botan",
-      "category": "ScratchPad",
+      "title": "TEST",
+      "category": "Planner",
+      "content": "<p>Test botan OK</p>",
       "tags": [],
       "date": "2025-06-30T21:46:28.143Z",
-      "favorite": false,
-      "deleted": false,
-      "pinned": false
+      "id": "c1eb"
     }
   ],
   "users": [
