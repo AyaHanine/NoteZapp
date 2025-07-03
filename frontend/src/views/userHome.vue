@@ -105,15 +105,15 @@ const mainNotes = computed(() =>
       return new Date(b.date) - new Date(a.date)
     }
     return (b.pinned || false) - (a.pinned || false)
-  })
+})
 )
 
-const planningNotes = computed(() =>
-  notes.value.filter(
-    note =>
-      !note.deleted &&
-      ["Planner", "TaskList"].includes(note.category)
-  )
+const plannerNotes = computed(() =>
+  notes.value.filter(note => !note.deleted && note.category === "Planner")
+)
+
+const taskListNotes = computed(() =>
+  notes.value.filter(note => !note.deleted && note.category === "TaskList")
 )
 
 function formatDate(date) {
@@ -198,8 +198,9 @@ function removeNoteFromList(noteId) {
             <div class="flex-1 border-t border-copper-200"></div>
           </div>
 
-          <div class="flex gap-6 w-full max-w-7xl mx-auto mt-3">
-            <div class="max-w-[410px] w-full">
+          <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 w-full max-w-7xl mx-auto">
+            <!-- 📝 SCRATCH PAD -->
+            <div class="xl:col-span-1">
               <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-3">
                 <div class="bg-white px-7 pt-5 pb-2 flex items-center justify-between">
                   <span class="text-xl font-bold text-copper-900">Scratch Pad</span>
@@ -222,42 +223,39 @@ function removeNoteFromList(noteId) {
               </div>
             </div>
 
-            <div class="max-w-[390px] w-full flex flex-col gap-5">
-              <div
-                v-for="note in planningNotes"
-                :key="note.id"
-                class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5 mb-3"
-              >
-                <div class="flex items-center gap-3 mb-1">
-                  <span class="text-copper-500 text-xl">
-                    {{ note.category === 'TaskList' ? '✅' : '📅' }}
-                  </span>
-                  <span class="font-bold text-copper-900 text-lg">
-                    {{ note.title }}
-                  </span>
-                  <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
+            <!-- ✅ TASKLIST -->
+            <div class="xl:col-span-1">
+              <div class="flex flex-col gap-3">
+                <h2 class="text-xl font-bold text-copper-800">Listes de tâches</h2>
+                <div v-for="note in taskListNotes" :key="note.id" class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5">
+                  <div class="flex items-center gap-3 mb-1">
+                    <span class="text-copper-500 text-xl">✅</span>
+                    <span class="font-bold text-copper-900 text-lg">{{ note.title }}</span>
+                    <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
+                  </div>
+                  <div class="text-copper-800 mb-2">{{ note.content }}</div>
+                  <ul class="pl-3 space-y-1">
+                    <li v-for="task in note.taskList" :key="task.id" class="flex items-center gap-2 text-copper-700">
+                      <input type="checkbox" :checked="task.completed" @change="toggleTask(note, task)" class="accent-copper-500 w-4 h-4" />
+                      <span :class="task.completed ? 'line-through text-copper-400' : ''">{{ task.content }}</span>
+                    </li>
+                  </ul>
                 </div>
-                <div class="text-copper-800 mb-2">{{ note.content }}</div>
-                <ul v-if="note.category === 'TaskList'" class="pl-3 space-y-1">
-                  <li
-                    v-for="task in note.taskList"
-                    :key="task.id"
-                    class="flex items-center gap-2 text-copper-700"
-                  >
-                    <input
-                      type="checkbox"
-                      :checked="task.completed"
-                      @change="toggleTask(note, task)"
-                      class="accent-copper-500 w-4 h-4"
-                    />
-                    <span :class="task.completed ? 'line-through text-copper-400' : ''">
-                      {{ task.content }}
-                    </span>
-                  </li>
-                </ul>
               </div>
-              <div v-if="planningNotes.length === 0" class="text-copper-400 px-4 py-8">
-                Aucun planning ou liste à afficher.
+            </div>
+
+            <!-- 🗓️ PLANNER -->
+            <div class="xl:col-span-1">
+              <div class="flex flex-col gap-3">
+                <h2 class="text-xl font-bold text-copper-800">Plannings</h2>
+                <div v-for="note in plannerNotes" :key="note.id" class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5">
+                  <div class="flex items-center gap-3 mb-1">
+                    <span class="text-copper-500 text-xl">📅</span>
+                    <span class="font-bold text-copper-900 text-lg">{{ note.title }}</span>
+                    <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
+                  </div>
+                  <div class="text-copper-800 mb-2">{{ note.content }}</div>
+                </div>
               </div>
             </div>
           </div>
