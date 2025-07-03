@@ -26,7 +26,7 @@ Elle permet la création, l’organisation, la catégorisation et la gestion de 
     
     *L’affichage doit proposer une présentation adaptée à une todo-list, distincte des autres notes.*  🚫 *Pas encore réalisée*
   - **Planner**  
-    ➡️ *Ajout spécifique d’un événement à planifier (calendrier).* 🚫 *Pas encore réalisée*
+    ➡️ *Ajout spécifique d’un événement à planifier (calendrier). ✅ *Déjà fait*
     
     *L’affichage doit ressembler à un agenda ou une liste d’événements, différent des autres notes.*
     
@@ -179,7 +179,7 @@ Plusieurs modifs sont à prévoir pour cette page, notamment l'affichage de l'ed
    > *Pour l’instant, l’affichage est statique.*  
    ![image](https://github.com/user-attachments/assets/1a72e8ac-3ce2-4897-a219-8489a88dde18)
 
-3. **Gestion des Planners**  
+3. **Gestion des Planners**   ✅ *Déjà fait*
    Le Planner est une catégorie de note sous forme de calendrier. À la création, l’utilisateur peut ajouter des événements (réunions, voyages, examens…). L’affichage doit être un calendrier interactif, distinct des autres types de notes, permettant de consulter ses événements.  
    > *Respecter le thème du site pour l’affichage.*  
    ![image](https://github.com/user-attachments/assets/ed579b37-3708-45b8-9842-ae6ff7b67386)
