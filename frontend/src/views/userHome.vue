@@ -73,11 +73,13 @@ const filteredNotes = computed(() => {
     arr = notes.value.filter(note => !note.deleted && note.userId === userId)
   }
   if (selectedMenu.value === "favorites") {
-    arr = notes.value.filter(note => note.favorite && !note.deleted)
+    arr = notes.value.filter(note => note.favorite && !note.deleted && note.userId === userId)
   }
-  if (selectedMenu.value === "category") {
-    arr = notes.value.filter(note => note.category === selectedCategory.value && !note.deleted)
-  }
+if (selectedMenu.value === "category") {
+  arr = notes.value.filter(
+    note => note.category === selectedCategory.value && !note.deleted && note.userId === userId
+  )
+}
   if (searchQuery.value && arr.length) {
     const q = searchQuery.value.toLowerCase()
     arr = arr.filter(note => {
@@ -100,22 +102,27 @@ const mainNotes = computed(() =>
     .filter(
       note =>
         !note.deleted &&
-        !["Planner", "TaskList"].includes(note.category)
+        !["Planner", "TaskList"].includes(note.category) &&
+        note.userId === userId
     )
     .slice().sort((a, b) => {
     if ((a.pinned || false) === (b.pinned || false)) {
       return new Date(b.date) - new Date(a.date)
     }
     return (b.pinned || false) - (a.pinned || false)
-})
+  })
 )
 
 const plannerNotes = computed(() =>
-  notes.value.filter(note => !note.deleted && note.category === "Planner")
+  notes.value.filter(
+    note => !note.deleted && note.category === "Planner" && note.userId === userId
+  )
 )
 
 const taskListNotes = computed(() =>
-  notes.value.filter(note => !note.deleted && note.category === "TaskList")
+  notes.value.filter(
+    note => !note.deleted && note.category === "TaskList" && note.userId === userId
+  )
 )
 
 function formatDate(date) {

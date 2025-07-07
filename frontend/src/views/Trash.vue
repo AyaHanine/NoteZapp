@@ -46,8 +46,11 @@ async function restoreNote(note) {
   }
 }
 
+const userId = localStorage.getItem("userId")
+
 const trashNotes = computed(() => {
   let arr = notes.value.filter(n => {
+    if (n.userId !== userId) return false
     if (!n.deleted) return false
     if (!n.deletionDate) return true
     const deletion = new Date(n.deletionDate)
