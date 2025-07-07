@@ -65,10 +65,12 @@ function newNote() {
   alert("Nouvelle note (à implémenter)")
 }
 
+const userId = localStorage.getItem("userId")
+
 const filteredNotes = computed(() => {
   let arr = []
   if (selectedMenu.value === "notes") {
-    arr = notes.value.filter(note => !note.deleted)
+    arr = notes.value.filter(note => !note.deleted && note.userId === userId)
   }
   if (selectedMenu.value === "favorites") {
     arr = notes.value.filter(note => note.favorite && !note.deleted)

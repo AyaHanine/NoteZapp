@@ -40,6 +40,7 @@ const handleLogin = async () => {
       email: email.value,
       password: password.value,
     })
+    localStorage.setItem("userId", userStore.user.id)
     router.push('/user-home')
   } catch (error) {
     errorMessage.value = error.message
