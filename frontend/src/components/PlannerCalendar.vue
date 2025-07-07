@@ -76,11 +76,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue"
+import { ref, computed, onMounted, watch } from "vue"
 import axios from "axios"
 import { useUserStore } from "@/stores/user"
 
 const userStore = useUserStore()
+const userId = computed(() => userStore.user?.id || localStorage.getItem("userId") || null)
 
 const currentDate = ref(new Date())
 const events = ref([])
@@ -90,23 +91,33 @@ const newEvent = ref({
   start: "",
   end: "",
   category: "Planner",
-  userId: userStore.user?.id || null,
+  userId: userId.value,
   createdAt: new Date().toISOString()
 })
 
+watch(userId, val => {
+  newEvent.value.userId = val
+})
+
 const fetchEvents = async () => {
-  const res = await axios.get("http://localhost:3001/notes?category=Planner")
-  events.value = res.data.map(e => ({
-    ...e,
-    start: new Date(e.start),
-    end: new Date(e.end)
-  }))
+  if (!userId.value) return
+  const res = await axios.get(`http://localhost:3001/notes?category=Planner&userId=${userId.value}`)
+  events.value = Array.isArray(res.data)
+    ? res.data.map(e => ({
+      ...e,
+      start: e.start ? new Date(e.start) : null,
+      end: e.end ? new Date(e.end) : null
+    }))
+    : []
 }
 
 const addEvent = async () => {
   if (!newEvent.value.title || !newEvent.value.start || !newEvent.value.end) return
   await axios.post("http://localhost:3001/notes", {
     ...newEvent.value,
+    start: new Date(newEvent.value.start).toISOString(),
+    end: new Date(newEvent.value.end).toISOString(),
+    userId: userId.value,
     createdAt: new Date().toISOString()
   })
   newEvent.value.title = ""
@@ -147,7 +158,6 @@ const calendarDays = computed(() => {
     const date = new Date(year, month, day)
     const isToday = isDateToday(date)
     const dayEvents = getEventsForDate(date)
-
     days.push({
       day,
       date,
@@ -178,8 +188,13 @@ const isDateToday = (date) => {
 
 const getEventsForDate = (date) => {
   return events.value.filter(e => {
+    if (!e.start) return false
     const d = new Date(e.start)
-    return d.toDateString() === date.toDateString()
+    return (
+      d.getFullYear() === date.getFullYear() &&
+      d.getMonth() === date.getMonth() &&
+      d.getDate() === date.getDate()
+    )
   })
 }
 
@@ -191,7 +206,5 @@ const nextMonth = () => {
   currentDate.value = new Date(currentDate.value.getFullYear(), currentDate.value.getMonth() + 1, 1)
 }
 
-onMounted(() => {
-  fetchEvents()
-})
+onMounted(fetchEvents)
 </script>

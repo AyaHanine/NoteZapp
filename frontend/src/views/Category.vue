@@ -3,7 +3,7 @@ import { ref, computed, onMounted, watch } from "vue"
 import { useRoute } from "vue-router"
 import axios from "axios"
 import SidebarCategories from "@/components/SidebarCategories.vue"
-import PlannerCalendar from "@/components/PlannerCalendar.vue" 
+import PlannerCalendar from "@/components/PlannerCalendar.vue"
 
 const route = useRoute()
 const categories = ["Planner", "TaskList", "Thoughts", "Journal", "ClassNotes", "Documents"]
@@ -33,8 +33,12 @@ watch(
   }
 )
 
+const userId = localStorage.getItem("userId")
+
 const categoryNotes = computed(() =>
-  notes.value.filter(n => n.category === selectedCategory.value && !n.deleted)
+  notes.value.filter(
+    n => n.category === selectedCategory.value && !n.deleted && n.userId === userId
+  )
 )
 
 // Fonction pour cocher/décocher une tâche

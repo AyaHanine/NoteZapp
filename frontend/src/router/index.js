@@ -23,25 +23,25 @@ const router = createRouter({
       path: '/user-home',
       name: 'userHome',
       component: UserHome,
-      meta: { title: 'Your Personal Space - NoteZapp', showHeaderFooter: true }
+      meta: { title: 'Your Personal Space - NoteZapp', showHeaderFooter: true, requiresAuth: true }
     },
     {
       path: '/notes/add',
       name: 'add-note',
       component: AddNotePage,
-      meta: { title: 'Feel Free - NoteZapp', showHeaderFooter: true }
+      meta: { title: 'Feel Free - NoteZapp', showHeaderFooter: true, requiresAuth: true }
     },
     {
       path: '/trash',
       name: 'trash',
       component: Trash,
-      meta: { title: 'Corbeille - NoteZapp', showHeaderFooter: true }
+      meta: { title: 'Corbeille - NoteZapp', showHeaderFooter: true, requiresAuth: true }
     },
     {
       path: '/favorites',
       name: 'favorites',
       component: Favorites,
-      meta: { title: 'Favoris - NoteZapp', showHeaderFooter: true }
+      meta: { title: 'Favoris - NoteZapp', showHeaderFooter: true, requiresAuth: true }
     },
     {
       path: '/category/:name',
@@ -65,15 +65,24 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: UserProfile,
-      meta: { title: 'Mon Profil - NoteZapp', showHeaderFooter: true }
+      meta: { title: 'Mon Profil - NoteZapp', showHeaderFooter: true, requiresAuth: true }
     },
     {
       path: '/notes/edit/:id',
       name: 'EditNote',
       component: EditNotePage,
-      meta: { title: 'Modifier la note - NoteZapp', showHeaderFooter: true }
+      meta: { title: 'Modifier la note - NoteZapp', showHeaderFooter: true, requiresAuth: true }
     },
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = !!localStorage.getItem("userId")
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router

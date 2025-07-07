@@ -72,17 +72,16 @@
           @click="goToCategory(cat)"
         />
       </div>
+      <!-- Bouton Déconnexion -->
+      <div class="mt-auto px-6 py-4 border-t border-copper-800">
+        <button
+          @click="logout"
+          class="w-full text-sm font-semibold text-copper-100 bg-copper-700 py-2 rounded hover:bg-copper-600 transition"
+        >
+          Se déconnecter
+        </button>
+      </div>
     </nav>
-
-    <!-- Bouton Déconnexion -->
-    <div class="mt-auto px-6 py-4 border-t border-copper-800">
-      <button
-        @click="logout"
-        class="w-full text-sm font-semibold text-copper-100 bg-copper-700 py-2 rounded hover:bg-copper-600 transition"
-      >
-        Se déconnecter
-      </button>
-    </div>
   </aside>
 </template>
 
