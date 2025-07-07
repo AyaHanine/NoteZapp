@@ -129,6 +129,8 @@ function addTask() {
 }
 function removeTask(i) { taskList.value.splice(i, 1) }
 
+const userId = localStorage.getItem("userId")
+
 // --- ENVOI ---
 async function submitNote() {
   errorMsg.value = ""
@@ -146,6 +148,7 @@ async function submitNote() {
         content: noteContent.value,
         tags: tags.value,
         date: new Date().toISOString(),
+        userId: userId,
         ...(noteCategory.value === "TaskList" ? { taskList: taskList.value } : {})
       })
     });

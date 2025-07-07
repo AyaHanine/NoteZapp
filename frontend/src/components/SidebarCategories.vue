@@ -1,13 +1,21 @@
 <template>
   <aside class="w-64 min-h-screen flex flex-col bg-copper-900 shadow-lg border-r border-copper-800">
-    <!-- Profil utilisateur -->
-    <div class="flex items-center px-6 py-7 border-b border-copper-800">
-      <div class="rounded-full bg-copper-400 text-copper-950 w-10 h-10 flex items-center justify-center text-lg font-bold shadow-inner">U</div>
-      <div class="ml-3">
-        <div class="font-bold text-copper-100 text-base">username</div>
-        <div class="text-xs text-copper-400">username@notezapp.com</div>
+    <!-- Profil utilisateur dynamique (clicable vers profil) -->
+    <router-link to="/profile" class="flex items-center px-6 py-7 border-b border-copper-800 cursor-pointer">
+      <div
+        class="rounded-full bg-copper-400 text-copper-950 w-10 h-10 flex items-center justify-center text-lg font-bold shadow-inner"
+      >
+        {{ userStore.user?.username?.charAt(0)?.toUpperCase() || 'U' }}
       </div>
-    </div>
+      <div class="ml-3">
+        <div class="font-bold text-copper-100 text-base">
+          {{ userStore.user?.username || 'Utilisateur' }}
+        </div>
+        <div class="text-xs text-copper-400">
+          {{ userStore.user?.email || 'email@notezapp.com' }}
+        </div>
+      </div>
+    </router-link>
 
     <!-- Search bar -->
     <div class="px-6 pt-5 pb-2">
@@ -64,19 +72,29 @@
           @click="goToCategory(cat)"
         />
       </div>
+      <!-- Bouton Déconnexion -->
+      <div class="mt-auto px-6 py-4 border-t border-copper-800">
+        <button
+          @click="logout"
+          class="w-full text-sm font-semibold text-copper-100 bg-copper-700 py-2 rounded hover:bg-copper-600 transition"
+        >
+          Se déconnecter
+        </button>
+      </div>
     </nav>
   </aside>
 </template>
 
 <script setup>
-
 import SidebarItem from "@/components/SidebarItem.vue";
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+const router = useRouter()
 
 defineProps(['categories', 'selectedCategory', 'selectedMenu', 'searchQuery']);
 defineEmits(['update:searchQuery'])
-
-const router = useRouter()
 
 function goToNotes() {
   router.push('/user-home')
@@ -96,5 +114,10 @@ function goToFavorites() {
 
 function goToCategory(cat) {
   router.push(`/category/${cat}`)
+}
+
+function logout() {
+  userStore.logout()
+  router.push('/') // redirige vers la page d'accueil
 }
 </script>

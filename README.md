@@ -16,20 +16,20 @@ Elle permet la création, l’organisation, la catégorisation et la gestion de 
 
 ### Gestion des notes
 
-#### Création de notes 
+#### Création de notes
 - **Catégories** disponibles à la création :
-  - **Journal**, **Document**, **ClassNotes**, **Thoughts**    ✅ *Déjà fait*
-    
-    ➡️ *Création et affichage déjà mis en place* (**modification non encore réalisée**)
-  - **TaskList**  
-    ➡️ *Ajout spécifique d’une checklist (liste de tâches à cocher).*
-    
-    *L’affichage doit proposer une présentation adaptée à une todo-list, distincte des autres notes.*  🚫 *Pas encore réalisée*
-  - **Planner**  
-    ➡️ *Ajout spécifique d’un événement à planifier (calendrier).* 🚫 *Pas encore réalisée*
-    
-    *L’affichage doit ressembler à un agenda ou une liste d’événements, différent des autres notes.*
-    
+    - **Journal**, **Document**, **ClassNotes**, **Thoughts**    ✅ *Déjà fait*
+
+      ➡️ *Création et affichage déjà mis en place* ✅ *Déjà fait*
+    - **TaskList**  
+      ➡️ *Ajout spécifique d’une checklist* ✅ *Déjà fait*
+
+      *L’affichage doit proposer une présentation adaptée à une todo-list, distincte des autres notes.*  * ✅ *Déjà fait*
+    - **Planner**  
+      ➡️ *Ajout spécifique d’un événement à planifier (calendrier).* 🚫 *Pas encore réalisée*
+
+      *L’affichage doit ressembler à un agenda ou une liste d’événements, différent des autres notes.*
+
 - **Titre** obligatoire
 - **Contenu** (éditeur riche)
 - **Tags** facultatifs
@@ -39,7 +39,7 @@ Actuellement, lors de la création d’une note, l’utilisateur saisit d’abor
 
 #### Affichage des notes
 - Vue par **catégorie**  ✅ *Déjà fait*
-  *Chaque catégorie aura son propre affichage (notamment pour TaskList & Planner qui auront une vue différente des autres notes).* 🚫 *Pas encore réalisée*
+  *Chaque catégorie aura son propre affichage (notamment pour TaskList & Planner qui auront une vue différente des autres notes).* 🚫 *Pas términer*
 - Vue **corbeille** : Les notes qui sont supprimées, et c'est ici ou on peut soit les supprimer definitivement soit les récupérer. ✅ *Déjà fait*
 - Vue **favoris** : Les notes mises en favoris. ✅ *Déjà fait*
 - Vue **toutes notes** ✅ *Déjà fait*
@@ -47,13 +47,14 @@ Actuellement, lors de la création d’une note, l’utilisateur saisit d’abor
 
 #### Modification
 - Modification des notes  
+  (Réaliser juste pour les notes dans la home)
   🚫 *Pas encore réalisée* pour toutes les catégories
 
 #### Suppression
 - **Suppression douce** (passage en corbeille)  
   ✅ *Déjà fait*
-- **Restauration** depuis la corbeille 🚫 *Pas encore réalisée*
-- **Suppression définitive** 🚫  *Pas encore réalisée*
+- **Restauration** depuis la corbeille* ✅ *Déjà fait*
+- **Suppression définitive** ✅ *Déjà fait*
 
 ---
 
@@ -70,17 +71,16 @@ Actuellement, lors de la création d’une note, l’utilisateur saisit d’abor
 ---
 
 ### ScratchPad
-- Bloc de prise de notes rapide  
-  🚫 *Logique non encore mise en place*
+- Bloc de prise de notes rapide ✅ *Déjà fait*
 
 ---
 
 ### Recherche 🚫 *Pas encore réalisée*
 - Recherche avancée dans la barre de recherche par :
-  - Mot-clé (texte du contenu)
-  - Titre
-  - Tag
-  - Catégorie
+    - Mot-clé (texte du contenu)
+    - Titre
+    - Tag
+    - Catégorie
 
 ---
 
@@ -107,7 +107,7 @@ Actuellement, lors de la création d’une note, l’utilisateur saisit d’abor
     ```bash
     npm run dev
     ```
-    L’application Vue est accessible sur [http://localhost:5173](http://localhost:5173) (ou le port affiché dans le terminal).
+   L’application Vue est accessible sur [http://localhost:5173](http://localhost:5173) (ou le port affiché dans le terminal).
 
 ---
 
@@ -129,9 +129,9 @@ Le projet utilise [JSON Server](https://github.com/typicode/json-server) pour si
     ```bash
     npx json-server --watch db.json --port 3001
     ```
-    L’API REST est accessible sur [http://localhost:3001](http://localhost:3001).
+   L’API REST est accessible sur [http://localhost:3001](http://localhost:3001).
 
-    **Routes principales disponibles** :
+   **Routes principales disponibles** :
     - `GET /notes` : liste des notes
     - `POST /notes` : ajouter une note
     - `PUT /notes/:id` : modifier une note
@@ -169,18 +169,18 @@ Plusieurs modifs sont à prévoir pour cette page, notamment l'affichage de l'ed
 
 ---
 
-  ## Tâches à réaliser
+## Tâches à réaliser
 
 1. **Authentification**(en cours par Meryem)  
    L’utilisateur clique sur « Commencer gratuitement » et est redirigé vers la page d’authentification. Une fois authentifié, il accède à son espace personnel pour gérer ses notes.
 
 2. **Gestion des TaskList**  ✅ *Déjà fait*
-   Une des catégories de notes proposées est la TaskList, présentée sous forme de To-Do List. Lors de la création, l’utilisateur saisit les tâches à réaliser. Après ajout, la TaskList doit s’afficher différemment des autres notes, en format checklist interactive (avec possibilité de cocher/décocher chaque tâche).  
+   Une des catégories de notes proposées est la TaskList, présentée sous forme de To-Do List. Lors de la création, l’utilisateur saisit les tâches à réaliser. Après ajout, la TaskList doit s’afficher différemment des autres notes, en format checklist interactive (avec possibilité de cocher/décocher chaque tâche).
    > *Pour l’instant, l’affichage est statique.*  
    ![image](https://github.com/user-attachments/assets/1a72e8ac-3ce2-4897-a219-8489a88dde18)
 
 3. **Gestion des Planners**  
-   Le Planner est une catégorie de note sous forme de calendrier. À la création, l’utilisateur peut ajouter des événements (réunions, voyages, examens…). L’affichage doit être un calendrier interactif, distinct des autres types de notes, permettant de consulter ses événements.  
+   Le Planner est une catégorie de note sous forme de calendrier. À la création, l’utilisateur peut ajouter des événements (réunions, voyages, examens…). L’affichage doit être un calendrier interactif, distinct des autres types de notes, permettant de consulter ses événements.
    > *Respecter le thème du site pour l’affichage.*  
    ![image](https://github.com/user-attachments/assets/ed579b37-3708-45b8-9842-ae6ff7b67386)
 
@@ -188,31 +188,31 @@ Plusieurs modifs sont à prévoir pour cette page, notamment l'affichage de l'ed
    Permettre la modification d’une note via l’icône dédiée sur la NoteCard.
 
 6.  **Affichage d’une note**
-   
-   Permettre l’affichage détaillé d’une note au clic.
+
+Permettre l’affichage détaillé d’une note au clic.
 
 8.  **Suppression définitive des notes** ✅ *Déjà fait*
-   
-   Actuellement, seule la suppression douce (déplacement en corbeille) est implémentée. Il faudra permettre la suppression définitive d’une note depuis la corbeille (action irréversible).
+
+Actuellement, seule la suppression douce (déplacement en corbeille) est implémentée. Il faudra permettre la suppression définitive d’une note depuis la corbeille (action irréversible).
 
 10.  **Restauration de notes depuis la corbeille** ✅ *Déjà fait*
-    
-   Permettre la récupération d’une note supprimée depuis la corbeille.
+
+Permettre la récupération d’une note supprimée depuis la corbeille.
 
 12. **Suppression automatique après délai**  ✅ *Déjà fait*
-   Mettre en place un timer : après 14 jours en corbeille, une note est supprimée définitivement si elle n’a pas été restaurée.
+    Mettre en place un timer : après 14 jours en corbeille, une note est supprimée définitivement si elle n’a pas été restaurée.
 
 13. **Recherche de notes**  ✅ *Déjà fait*
-   Ajouter une barre de recherche permettant de filtrer les notes par :
-   - Titre
-   - Tags
-   - Mots-clés présents dans le contenu
+    Ajouter une barre de recherche permettant de filtrer les notes par :
+- Titre
+- Tags
+- Mots-clés présents dans le contenu
 
 11. **Gestion des notes épinglées**  ✅ *Déjà fait*
     Permettre d’épingler une note grâce à l’icône « pin » sur la NoteCard. Les notes épinglées sont affichées en priorité.
 
 12. **ScratchPad**  
-    Implémenter et intégrer la logique du scratchpad.
+    Implémenter et intégrer la logique du scratchpad. ✅ *Déjà fait*
 
 
 

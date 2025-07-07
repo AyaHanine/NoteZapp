@@ -24,8 +24,10 @@ const fetchNotes = async () => {
 
 onMounted(fetchNotes)
 
+const userId = localStorage.getItem("userId")
+
 const favoriteNotes = computed(() => {
-  let arr = notes.value.filter(n => n.favorite && !n.deleted)
+  let arr = notes.value.filter(n => n.favorite && !n.deleted && n.userId === userId)
   if (searchQuery.value) {
     const q = searchQuery.value.toLowerCase()
     arr = arr.filter(note => {
