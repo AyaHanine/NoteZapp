@@ -169,8 +169,8 @@
   </div>
 
       <!-- Planner à venir -->
-      <div v-if="noteCategory === 'Planner'" class="flex-1 flex flex-col items-center justify-center py-10 text-copper-400 text-2xl font-semibold">
-        <PlannerCalendar />
+      <div v-if="noteCategory === 'Planner'" class="flex-1 flex flex-col items-center justify-center py-32 text-copper-400 text-2xl font-semibold">
+        <<div>Bientôt disponible !</div>>
       </div>
 
       <!-- MODALE CHOIX CATÉGORIE -->
@@ -240,7 +240,6 @@ import { ref, watch } from "vue"
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import { useRouter } from 'vue-router'
-import PlannerCalendar from "@/components/PlannerCalendar.vue";
 
 const categories = ["Planner", "TaskList", "Thoughts", "Journal", "ClassNotes", "Documents"];
 const categoriesLabels = {
