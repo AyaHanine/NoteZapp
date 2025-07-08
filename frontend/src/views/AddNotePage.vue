@@ -244,10 +244,10 @@ import { useRouter } from 'vue-router'
 const categories = ["Planner", "TaskList", "Thoughts", "Journal", "ClassNotes", "Documents"];
 const categoriesLabels = {
   Planner: "Planner",
-  TaskList: "Liste de tâches",
-  Thoughts: "Pensées",
+  TaskList: "TaskList",
+  Thoughts: "Thoughts",
   Journal: "Journal",
-  ClassNotes: "Notes de cours",
+  ClassNotes: "Class Notes",
   Documents: "Documents"
 };
 const router = useRouter()
