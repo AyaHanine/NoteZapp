@@ -31,7 +31,7 @@
       </div>
 
       <!-- TaskList UI -->
-        <div class="flex flex-col items-center min-h-screen bg-copper-50 py-8">
+        <div v-if="noteCategory === 'TaskList'" class="flex flex-col items-center min-h-screen bg-copper-50 py-8">
     <div class="w-full max-w-md bg-white rounded-t-2xl shadow flex flex-col border-x border-t border-copper-100 relative">
       <!-- Header style mobile -->
       <div class="flex items-center justify-center h-20 relative border-b border-copper-100">
