@@ -1,4 +1,5 @@
 <script setup>
+import PlannerCalendar from "@/components/PlannerCalendar.vue"
 import { ref, computed, onMounted, watch } from "vue"
 import axios from "axios"
 import SidebarCategories from "@/components/SidebarCategories.vue"
@@ -254,19 +255,15 @@ function removeNoteFromList(noteId) {
             </div>
 
             <!-- 🗓️ PLANNER -->
-            <div class="xl:col-span-1">
-              <div class="flex flex-col gap-3">
-                <h2 class="text-xl font-bold text-copper-800">Plannings</h2>
-                <div v-for="note in plannerNotes" :key="note.id" class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5">
-                  <div class="flex items-center gap-3 mb-1">
-                    <span class="text-copper-500 text-xl">📅</span>
-                    <span class="font-bold text-copper-900 text-lg">{{ note.title }}</span>
-                    <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
-                  </div>
-                  <div class="text-copper-800 mb-2">{{ note.content }}</div>
-                </div>
-              </div>
-            </div>
+<div class="xl:col-span-1">
+  <div class="flex flex-col gap-3">
+    <h2 class="text-xl font-bold text-copper-800">Plannings</h2>
+    <div class="bg-white rounded-xl shadow overflow-hidden p-3">
+<PlannerCalendar :hide-form="true" :mini="true" :scrollable="true" />
+    </div>
+  </div>
+</div>
+
           </div>
         </template>
       </section>

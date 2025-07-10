@@ -72,7 +72,7 @@ async function toggleTask(note, task) {
 
         <div v-else>
           <!-- Affichage spécifique pour Planner -->
-          <PlannerCalendar v-if="selectedCategory === 'Planner'" />
+<PlannerCalendar v-if="selectedCategory === 'Planner'" :hide-form="true" />
 
           <!-- Affichage standard pour les autres catégories -->
           <div v-else>
