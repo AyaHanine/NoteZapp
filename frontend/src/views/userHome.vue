@@ -14,6 +14,8 @@ const loading = ref(true)
 const scratchText = ref("")
 const searchQuery = ref("")
 
+defineProps({ note: Object })
+
 const sectionTitle = computed(() => {
   if (selectedMenu.value === "notes") return "Toutes les notes"
   if (selectedMenu.value === "favorites") return "Favoris"
@@ -233,37 +235,34 @@ function removeNoteFromList(noteId) {
               </div>
             </div>
 
-            <!-- ✅ TASKLIST -->
+            <!-- TASKLIST -->
             <div class="xl:col-span-1">
               <div class="flex flex-col gap-3">
                 <h2 class="text-xl font-bold text-copper-800">Listes de tâches</h2>
                 <div v-for="note in taskListNotes" :key="note.id" class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5">
-                  <div class="flex items-center gap-3 mb-1">
-                    <span class="text-copper-500 text-xl">✅</span>
-                    <span class="font-bold text-copper-900 text-lg">{{ note.title }}</span>
-                    <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
+                      <div class="flex items-center gap-3 mb-1">
+                        <span class="font-bold text-copper-900 text-lg">{{ note.title }}</span>
+                        <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
+                      </div>
+                      <div class="text-copper-800 mb-2">{{ note.content }}</div>
+                        <ul class="pl-3 space-y-1">
+                          <li v-for="task in note.taskList" :key="task.id" class="flex items-center gap-2 text-copper-700">
+                            <input type="checkbox" :checked="task.completed" @change="toggleTask(note, task)" class="accent-copper-500 w-4 h-4" />
+                            <span :class="task.completed ? 'line-through text-copper-400' : ''">{{ task.content }}</span>
+                          </li>
+                        </ul>
+                </div>   
+              </div>
+           </div>
+            <!-- PLANNER -->
+              <div class="xl:col-span-1">
+                <div class="flex flex-col gap-3">
+                  <h2 class="text-xl font-bold text-copper-800">Plannings</h2>
+                  <div class="bg-white rounded-xl shadow overflow-hidden p-3">
+                        <PlannerCalendar :hide-form="true" :mini="true" :scrollable="true" />
                   </div>
-                  <div class="text-copper-800 mb-2">{{ note.content }}</div>
-                  <ul class="pl-3 space-y-1">
-                    <li v-for="task in note.taskList" :key="task.id" class="flex items-center gap-2 text-copper-700">
-                      <input type="checkbox" :checked="task.completed" @change="toggleTask(note, task)" class="accent-copper-500 w-4 h-4" />
-                      <span :class="task.completed ? 'line-through text-copper-400' : ''">{{ task.content }}</span>
-                    </li>
-                  </ul>
                 </div>
               </div>
-            </div>
-
-            <!-- 🗓️ PLANNER -->
-<div class="xl:col-span-1">
-  <div class="flex flex-col gap-3">
-    <h2 class="text-xl font-bold text-copper-800">Plannings</h2>
-    <div class="bg-white rounded-xl shadow overflow-hidden p-3">
-<PlannerCalendar :hide-form="true" :mini="true" :scrollable="true" />
-    </div>
-  </div>
-</div>
-
           </div>
         </template>
       </section>
