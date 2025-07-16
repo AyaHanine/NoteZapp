@@ -13,6 +13,15 @@ const notes = ref([])
 const loading = ref(true)
 const scratchText = ref("")
 const searchQuery = ref("")
+const tasklistPage = ref(1)
+const tasklistPerPage = 2
+const sortedTaskListNotes = computed(() =>
+  notes.value
+    .filter(note => !note.deleted && note.category === "TaskList" && note.userId === userId)
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+)
+
+
 
 defineProps({ note: Object })
 
@@ -155,6 +164,23 @@ function updatePin(updatedNote) {
 function removeNoteFromList(noteId) {
   notes.value = notes.value.filter(n => n.id !== noteId)
 }
+
+const paginatedTaskListNotes = computed(() => {
+  const start = (tasklistPage.value - 1) * tasklistPerPage
+  const end = start + tasklistPerPage
+  return sortedTaskListNotes.value.slice(start, end)
+})
+
+const totalTasklistPages = computed(() =>
+  Math.ceil(sortedTaskListNotes.value.length / tasklistPerPage)
+)
+
+function nextTasklistPage() {
+  if (tasklistPage.value < totalTasklistPages.value) tasklistPage.value++
+}
+function prevTasklistPage() {
+  if (tasklistPage.value > 1) tasklistPage.value--
+}
 </script>
 
 <template>
@@ -237,23 +263,35 @@ function removeNoteFromList(noteId) {
 
             <!-- TASKLIST -->
             <div class="xl:col-span-1">
-              <div class="flex flex-col gap-3">
-                <h2 class="text-xl font-bold text-copper-800">Listes de tâches</h2>
-                <div v-for="note in taskListNotes" :key="note.id" class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5">
-                      <div class="flex items-center gap-3 mb-1">
-                        <span class="font-bold text-copper-900 text-lg">{{ note.title }}</span>
-                        <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
-                      </div>
-                      <div class="text-copper-800 mb-2">{{ note.content }}</div>
-                        <ul class="pl-3 space-y-1">
-                          <li v-for="task in note.taskList" :key="task.id" class="flex items-center gap-2 text-copper-700">
-                            <input type="checkbox" :checked="task.completed" @change="toggleTask(note, task)" class="accent-copper-500 w-4 h-4" />
-                            <span :class="task.completed ? 'line-through text-copper-400' : ''">{{ task.content }}</span>
-                          </li>
-                        </ul>
-                </div>   
-              </div>
-           </div>
+  <div class="flex flex-col gap-3">
+    <h2 class="text-xl font-bold text-copper-800">Listes de tâches</h2>
+    <div
+      v-for="note in paginatedTaskListNotes"
+      :key="note.id"
+      class="bg-white rounded-2xl shadow border-l-4 border-copper-400 p-5"
+    >
+      <div class="flex items-center gap-3 mb-1">
+        <span class="font-bold text-copper-900 text-lg">{{ note.title }}</span>
+        <span class="text-xs text-copper-400 ml-auto">{{ formatDate(note.date) }}</span>
+      </div>
+      <div class="text-copper-800 mb-2">{{ note.content }}</div>
+      <ul class="pl-3 space-y-1">
+        <li v-for="task in note.taskList" :key="task.id" class="flex items-center gap-2 text-copper-700">
+          <input type="checkbox" :checked="task.completed" @change="toggleTask(note, task)" class="accent-copper-500 w-4 h-4" />
+          <span :class="task.completed ? 'line-through text-copper-400' : ''">{{ task.content }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- PAGINATION CONTROLS -->
+     <div v-if="totalTasklistPages > 1" class="flex items-center justify-center mt-2 gap-3">
+    <button @click="prevTasklistPage" :disabled="tasklistPage === 1" class="px-3 py-1 rounded bg-copper-200 font-bold">‹</button>
+    <span>{{ tasklistPage }} / {{ totalTasklistPages }}</span>
+    <button @click="nextTasklistPage" :disabled="tasklistPage === totalTasklistPages" class="px-3 py-1 rounded bg-copper-200 font-bold">›</button>
+  </div>
+  </div>
+</div>
+
             <!-- PLANNER -->
               <div class="xl:col-span-1">
                 <div class="flex flex-col gap-3">
