@@ -170,8 +170,8 @@
 
       <!-- Planner à venir -->
      <div v-if="noteCategory === 'Planner'" class="p-6 max-w-4xl mx-auto w-full">
-  <PlannerCalendar :hideForm="false" />
-</div>
+      <PlannerCalendar :hideForm="false" />
+      </div>
 
 
       <!-- MODALE CHOIX CATÉGORIE -->

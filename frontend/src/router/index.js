@@ -9,6 +9,7 @@ import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import UserProfile from '@/views/UserProfile.vue'
 import EditNotePage from '@/views/EditNotePage.vue'
+import NoteDetail from '@/views/NoteDetail.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,6 +73,12 @@ const router = createRouter({
       name: 'EditNote',
       component: EditNotePage,
       meta: { title: 'Modifier la note - NoteZapp', showHeaderFooter: true, requiresAuth: true }
+    },
+    {
+    path: '/notes/:id',
+    name: 'NoteDetail',
+    component: NoteDetail,
+    props: true
     },
   ]
 })
