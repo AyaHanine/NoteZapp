@@ -1,7 +1,10 @@
 <template>
-  <div class="bg-copper-100 p-6 border border-copper-300 rounded-xl">
+  <div :class="[
+    'bg-copper-100 border border-copper-300 rounded-xl',
+    mini ? 'p-2 text-sm' : 'p-6'
+  ]">
     <!-- Formulaire ajout événement -->
-    <div class="mb-6 space-y-2 bg-copper-50 p-4 rounded-lg border border-copper-300">
+    <div v-if="!hideForm" class="mb-6 space-y-2 bg-copper-50 p-4 rounded-lg border border-copper-300">
       <h3 class="text-copper-900 font-bold text-lg">Ajouter un événement</h3>
       <input v-model="newEvent.title" placeholder="Titre" class="px-3 py-2 rounded w-full border border-copper-200" />
       <input v-model="newEvent.start" type="datetime-local" class="px-3 py-2 rounded w-full border border-copper-200" />
@@ -13,12 +16,12 @@
 
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-      <h2 class="text-2xl font-bold text-copper-900">Calendrier</h2>
+      <h2 :class="['font-bold text-copper-900', mini ? 'text-lg' : 'text-2xl']">Calendrier</h2>
       <div class="flex items-center space-x-3">
         <button @click="previousMonth" class="bg-copper-300 text-copper-900 p-2 rounded-lg hover:bg-copper-400 transition-colors">
           ◀
         </button>
-        <div class="bg-copper-500 text-white px-6 py-2 rounded-lg font-semibold text-lg">
+        <div class="bg-copper-500 text-white px-4 py-1 rounded-lg font-semibold" :class="mini ? 'text-sm' : 'text-lg'">
           {{ currentMonthName }}
         </div>
         <button @click="nextMonth" class="bg-copper-300 text-copper-900 p-2 rounded-lg hover:bg-copper-400 transition-colors">
@@ -29,7 +32,12 @@
 
     <!-- Jours de la semaine -->
     <div class="grid grid-cols-7 gap-2 mb-4">
-      <div v-for="day in daysOfWeek" :key="day" class="text-center text-sm font-semibold text-copper-600 py-3">
+      <div
+        v-for="day in daysOfWeek"
+        :key="day"
+        class="text-center font-semibold text-copper-600"
+        :class="mini ? 'text-xs py-1' : 'text-sm py-3'"
+      >
         {{ day }}
       </div>
     </div>
@@ -39,33 +47,31 @@
       <div
         v-for="(day, index) in calendarDays"
         :key="index"
-        class="relative min-h-[100px] rounded-lg p-2 border-2 transition-all hover:bg-copper-100/80"
-        :class="{
-          'bg-copper-50 text-copper-400 border-copper-300': !day.isCurrentMonth,
-          'bg-white border-copper-400': day.isCurrentMonth,
-          'border-copper-900': day.isToday,
-        }"
+        :class="[
+          'relative rounded-lg border-2 transition-all hover:bg-copper-100/80',
+mini ? 'min-h-[75px] p-2 text-sm' : 'min-h-[100px] p-2',
+          !day.isCurrentMonth ? 'bg-copper-50 text-copper-400 border-copper-300' : 'bg-white border-copper-400',
+          day.isToday ? 'border-copper-900' : ''
+        ]"
       >
-        <!-- Numéro du jour -->
-        <div class="flex justify-between items-start mb-2">
+        <div class="flex justify-between items-start mb-1">
           <div
-            class="text-sm font-semibold"
+            class="font-semibold"
             :class="{
               'text-copper-400': !day.isCurrentMonth,
               'text-copper-900': day.isCurrentMonth,
-              'text-copper-900 font-bold': day.isToday,
+              'text-copper-900 font-bold': day.isToday
             }"
           >
             {{ day.day }}
           </div>
         </div>
 
-        <!-- Événements -->
         <div v-if="day.events?.length" class="space-y-1">
           <div
             v-for="(event, i) in day.events"
             :key="i"
-            class="text-xs p-2 rounded-md font-semibold bg-copper-400 text-white"
+            class="text-xs p-1 rounded-md font-semibold bg-copper-400 text-white truncate"
           >
             {{ event.title }}
           </div>
@@ -76,6 +82,23 @@
 </template>
 
 <script setup>
+const { hideForm, mini = false, scrollable = false } = defineProps({
+  hideForm: Boolean,
+  mini: {
+    type: Boolean,
+    default: false
+  },
+  scrollable: {
+    type: Boolean,
+    default: false
+  }
+})
+
+
+const isMini = mini === true
+
+
+
 import { ref, computed, onMounted, watch } from "vue"
 import axios from "axios"
 import { useUserStore } from "@/stores/user"
