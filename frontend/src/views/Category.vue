@@ -12,6 +12,12 @@ const selectedCategory = ref(route.params.name)
 const notes = ref([])
 const loading = ref(true)
 
+import { useRouter } from "vue-router"
+const router = useRouter()
+function openNote(id) {
+  router.push(`/notes/${id}`)
+}
+
 const fetchNotes = async () => {
   loading.value = true
   try {
@@ -72,7 +78,7 @@ async function toggleTask(note, task) {
 
         <div v-else>
           <!-- Affichage spécifique pour Planner -->
-          <PlannerCalendar v-if="selectedCategory === 'Planner'" />
+            <PlannerCalendar v-if="selectedCategory === 'Planner'" :hide-form="true" />
 
           <!-- Affichage standard pour les autres catégories -->
           <div v-else>
@@ -87,11 +93,10 @@ async function toggleTask(note, task) {
                   'bg-white rounded-2xl shadow border-l-4 p-5',
                   note.category === 'Planner' ? 'border-copper-400' : 'border-copper-400'
                 ]"
+                @click="note.category !== 'TaskList' && openNote(note.id)"
               >
                 <div class="flex items-center gap-3 mb-1">
-                  <span class="text-copper-500 text-xl">
-                    {{ note.category === 'TaskList' ? '✅' : note.category === 'Planner' ? '📅' : '📄' }}
-                  </span>
+                  
                   <span class="font-bold text-copper-900 text-lg">{{ note.title }}</span>
                   <span class="text-xs text-copper-400 ml-auto">{{ note.date }}</span>
                 </div>
